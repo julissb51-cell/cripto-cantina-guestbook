@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
 import "@stellar-scaffold/app-lib/styles.css"
 import App from "./App.tsx"
+import { LocaleProvider } from "./i18n.tsx"
 import { NotificationProvider } from "./providers/NotificationProvider.tsx"
 import { WalletProvider } from "./providers/WalletProvider.tsx"
 
@@ -25,7 +26,9 @@ createRoot(document.getElementById("root") as HTMLElement).render(
 			<QueryClientProvider client={queryClient}>
 				<WalletProvider>
 					<BrowserRouter basename={basename}>
-						<App />
+						<LocaleProvider>
+							<App />
+						</LocaleProvider>
 					</BrowserRouter>
 				</WalletProvider>
 			</QueryClientProvider>

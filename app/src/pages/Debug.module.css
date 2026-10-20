@@ -1,0 +1,35 @@
+.page {
+	width: min(100% - 2rem, 42rem);
+	margin: 6rem auto 3rem;
+	background-color: var(--color-paper);
+	background-image:
+		linear-gradient(rgba(232, 223, 204, 0.92), rgba(232, 223, 204, 0.92)),
+		url("../assets/grano.webp");
+	background-size: auto, 160px;
+	color: var(--color-ink);
+	border-radius: 22px;
+	border-left: 8px solid var(--color-cafe);
+	padding: var(--space-6) var(--space-5);
+	box-shadow: var(--shadow);
+}
+
+.page h2 {
+	font-size: clamp(1.8rem, 4vw, 2.4rem);
+	margin-bottom: var(--space-4);
+}
+
+.page p + p {
+	margin-top: var(--space-4);
+}
+
+.page a {
+	color: var(--color-wine);
+	font-weight: 650;
+}
+
+.page code {
+	background: rgba(42, 29, 22, 0.06);
+	border-color: rgba(42, 29, 22, 0.12);
+	color: var(--color-ink);
+	overflow-wrap: anywhere;
+}

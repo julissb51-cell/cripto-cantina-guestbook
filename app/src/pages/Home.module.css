@@ -1,31 +1,377 @@
 .Home {
-	max-width: 1040px;
+	width: 100%;
+}
+
+.eyebrow {
+	margin: 0 0 0.85rem;
+	font-family: var(--font-body);
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--color-gold);
+}
+
+.hero {
+	--foto: none;
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+	min-height: 100svh;
+	margin-top: -4.85rem;
+	padding: 8.5rem 4vw 4.5rem;
+	background-color: #1c140f;
+	background-image:
+		linear-gradient(
+			180deg,
+			rgba(16, 10, 7, 0.5) 0%,
+			rgba(16, 10, 7, 0.05) 16%,
+			rgba(16, 10, 7, 0) 58%,
+			rgba(40, 27, 20, 0.45) 84%,
+			#281b14 100%
+		),
+		linear-gradient(
+			90deg,
+			rgba(14, 9, 6, 0.84) 0%,
+			rgba(14, 9, 6, 0.5) 30%,
+			rgba(14, 9, 6, 0.05) 58%,
+			rgba(14, 9, 6, 0.16) 100%
+		),
+		var(--foto);
+	background-size: cover;
+	background-position:
+		center,
+		center,
+		center 46%;
+	background-repeat: no-repeat;
+}
+
+.heroInner {
+	width: min(1120px, 100%);
 	margin: 0 auto;
 }
 
-.intro {
-	margin: 0.5rem 0 2rem;
-	max-width: 40rem;
+.hero h1 {
+	max-width: 16ch;
+	font-weight: 560;
+	font-size: clamp(3.1rem, 6.4vw, 5.5rem);
+	line-height: 0.92;
+	letter-spacing: -0.035em;
+	color: var(--color-text);
 }
 
-.kicker {
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
-	font-size: 0.75rem;
-	color: var(--color-accent);
-	margin-bottom: 0.4rem;
+.heroCursiva,
+.heroOro {
+	font-style: italic;
+	font-weight: 500;
 }
 
-.intro h1 {
-	font-family: var(--font-display);
+.heroOro {
+	display: block;
+	color: var(--color-gold);
+}
+
+.heroLede {
+	max-width: 38rem;
+	margin-top: 1.4rem;
+	font-size: 1.05rem;
+	line-height: 1.55;
+	color: #efe4d2;
+}
+
+.heroAcciones {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.85rem;
+	margin-top: 1.8rem;
+}
+
+.heroAcciones button {
+	min-height: 3.05rem;
+	padding: 0.75rem 1.35rem;
+	border-radius: 14px;
+	border: none;
+	background: var(--color-wine);
+	color: var(--color-accent-text);
 	font-weight: 650;
-	font-size: clamp(2.1rem, 4vw, 3.4rem);
-	line-height: 1.05;
-	margin: 0 0 0.8rem;
 }
 
-.intro p:last-child {
-	margin: 0;
+.heroAcciones button:hover:not(:disabled) {
+	background: var(--color-accent-hover);
+}
+
+.contorno {
+	background: transparent !important;
+	color: var(--color-gold) !important;
+	border: 1.5px solid var(--color-gold) !important;
+}
+
+.contorno:hover:not(:disabled) {
+	background: rgba(201, 162, 78, 0.12) !important;
+}
+
+.stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.6rem 2.6rem;
+	margin: 2.8rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.stats li {
+	display: flex;
+	align-items: baseline;
+	gap: 0.55rem;
+	color: #f7f1e4;
+	font-size: 1.05rem;
+	font-weight: 700;
+}
+
+.statNum,
+.statInf {
+	font-family: var(--font-display);
+	font-style: italic;
+	font-weight: 650;
+	font-size: 1.95rem;
+	line-height: 1;
+	color: #fff8ee;
+}
+
+.seccion {
+	padding: 4.5rem 4vw 1rem;
+	scroll-margin-top: 5.5rem;
+}
+
+.interior {
+	width: min(1120px, 100%);
+	margin: 0 auto;
+}
+
+.seccion > .interior > h2 {
+	max-width: 16ch;
+	font-size: clamp(2.4rem, 5vw, 4.1rem);
+	font-weight: 560;
+	line-height: 1.02;
+	letter-spacing: -0.03em;
+	color: var(--color-text);
+}
+
+.seccion > .interior > h2 em {
+	font-style: italic;
+	font-weight: 500;
+}
+
+.bajada {
+	max-width: 40rem;
+	margin-top: 1rem;
 	color: var(--color-text-muted);
 	font-size: 1.05rem;
+}
+
+.pasos {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.25rem;
+	margin-top: 2.2rem;
+}
+
+.paso {
+	position: relative;
+	border-radius: 26px;
+	padding: 1.6rem 1.7rem 1.7rem;
+	min-height: 16rem;
+}
+
+.pasoCrema {
+	background-color: var(--color-paper);
+	background-image:
+		linear-gradient(rgba(232, 223, 204, 0.9), rgba(232, 223, 204, 0.9)),
+		url("../assets/grano.webp");
+	background-size: auto, 160px;
+	color: var(--color-ink);
+	box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+}
+
+.pasoCrema::before,
+.pasoVino::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 8px;
+	border-radius: 26px 0 0 26px;
+	background: var(--color-cafe);
+}
+
+.pasoVino::before {
+	background: rgba(36, 16, 16, 0.35);
+}
+
+.paso h3 {
+	margin-top: 0.35rem;
+	font-size: clamp(1.55rem, 2vw, 1.9rem);
+	font-weight: 560;
+	letter-spacing: -0.02em;
+}
+
+.paso p:last-child {
+	margin-top: 0.55rem;
+	font-size: 0.98rem;
+	line-height: 1.5;
+	max-width: 32rem;
+}
+
+.pasoCrema p:last-child {
+	color: #5c4e40;
+}
+
+.pasoOscuro {
+	background: var(--color-bg-raise);
+	color: var(--color-text);
+}
+
+.pasoOscuro p:last-child {
+	color: var(--color-text-muted);
+}
+
+.numero {
+	font-family: var(--font-display);
+	font-style: italic;
+	font-weight: 500;
+	font-size: clamp(3.2rem, 5vw, 4.4rem);
+	line-height: 0.9;
+	color: var(--color-wine);
+}
+
+.numeroOro {
+	color: var(--color-gold);
+}
+
+.pasoVino {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	margin-top: 1.25rem;
+	background: var(--color-wine);
+	color: var(--color-text);
+}
+
+.pasoVino p:last-child {
+	color: #f3e4d4;
+}
+
+.lapiz {
+	flex: none;
+	display: grid;
+	place-items: center;
+	width: 4.4rem;
+	height: 4.4rem;
+	border-radius: 50%;
+	border: 1.5px solid var(--color-gold);
+	color: var(--color-gold);
+}
+
+.lapiz svg {
+	width: 1.45rem;
+	height: 1.45rem;
+}
+
+.citaBloque {
+	margin: 2.6rem 0 0.4rem;
+}
+
+.cita {
+	max-width: 22em;
+	font-family: var(--font-display);
+	font-style: italic;
+	font-weight: 500;
+	font-size: clamp(1.8rem, 3.5vw, 2.85rem);
+	line-height: 1.22;
+	letter-spacing: -0.02em;
+	color: var(--color-text);
+}
+
+.tituloLibro {
+	max-width: none;
+}
+
+.cuentaLibro {
+	margin: 0.7rem 0 1.6rem;
+	color: #f7f1e4;
+	font-size: 1.15rem;
+	font-weight: 700;
+}
+
+.cuentaLibro span {
+	font-family: var(--font-display);
+	font-style: italic;
+	font-weight: 650;
+	font-size: 1.6rem;
+	color: #fff8ee;
+}
+
+.contrato h2 {
+	max-width: 14ch;
+}
+
+.contrato code {
+	display: block;
+	margin-top: 1.2rem;
+	padding: 0.85rem 1rem;
+	overflow-wrap: anywhere;
+	color: var(--color-text);
+	background: rgba(243, 234, 216, 0.06);
+	border-color: rgba(243, 234, 216, 0.16);
+}
+
+.contratoLinks {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.8rem;
+	margin-top: 1.2rem;
+}
+
+.contratoLinks a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	padding: 0.45rem 1rem;
+	border-radius: 999px;
+	border: 1.5px solid var(--color-gold);
+	color: var(--color-gold);
+	text-decoration: none;
+	font-weight: 650;
+	font-size: 0.95rem;
+}
+
+.contratoLinks a:hover {
+	background: rgba(201, 162, 78, 0.12);
+}
+
+@media (max-width: 760px) {
+	.hero {
+		align-items: flex-start;
+		min-height: 0;
+		padding-top: 7.2rem;
+		padding-bottom: 3rem;
+	}
+
+	.hero h1 {
+		font-size: clamp(2.6rem, 12vw, 3.6rem);
+	}
+
+	.pasos {
+		grid-template-columns: 1fr;
+	}
+
+	.pasoVino {
+		align-items: flex-start;
+	}
+
+	.seccion {
+		padding-top: 3.2rem;
+	}
 }

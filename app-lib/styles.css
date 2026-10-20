@@ -1,20 +1,54 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Inconsolata:wght@500&display=swap");
-
 :root {
-	--color-bg: #1b1410;
-	--color-surface: #2a1e18;
-	--color-text: #f6efe4;
-	--color-text-muted: #cbbba8;
-	--color-border: #4a372c;
-	--color-accent: #e08a3c;
-	--color-success: #8fbf7a;
-	--color-error: #e07a6a;
-	--color-warning: #e0b15a;
-	--color-paper: #f4e7d0;
-	--color-ink: #2c2118;
-	--radius: 10px;
-	--shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
-	--font-display: "Fraunces", Georgia, serif;
+	/* Estética de la referencia: espresso, papel crema, vino y oro. */
+	--color-bg: #281b14;
+	--color-bg-deep: #1c140f;
+	--color-bg-raise: #3a2a20;
+	--color-candle: rgba(243, 234, 216, 0.08);
+	--color-bar: rgba(22, 14, 10, 0.72);
+	--color-bar-edge: rgba(243, 234, 216, 0.1);
+	--color-wood: #7b4b2a;
+	--color-wood-edge: #5c3820;
+	--color-cafe: #7b4b2a;
+	--color-cover: #3a241c;
+	--color-cover-light: #5c3b2c;
+	--color-cover-deep: #241610;
+	--color-foil: #c9a24e;
+	--color-foil-deep: #8c6a2e;
+	--color-foil-line: rgba(201, 162, 78, 0.55);
+	--color-gold: #c9a24e;
+	--color-wine: #7e3439;
+	--color-surface: #3a2a20;
+	--color-on-bar: #f3ead8;
+	--color-on-bar-muted: #cdbba6;
+	--color-text: #f3ead8;
+	--color-text-muted: #cdbba6;
+	--color-border: rgba(243, 234, 216, 0.16);
+	--color-accent: #7e3439;
+	--color-accent-hover: #692c30;
+	--color-accent-text: #f3ead8;
+	--color-olive: #5e6b3a;
+	--color-olive-soft: #c9a24e;
+	--color-olive-ink: #5a623a;
+	--color-paper: #e8dfcc;
+	--color-ink: #2a1d16;
+	--color-ink-soft: #5c4e40;
+	--color-success: #3f2416;
+	--color-error: #7e3439;
+	--color-warning: #8a5a28;
+	--radius: 14px;
+	--shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+	--font-display:
+		"Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+	--font-body: "Manrope", "Segoe UI", sans-serif;
+	--font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.5rem;
+	--space-6: 2rem;
+	--space-7: 3rem;
+	--space-8: 4.5rem;
 }
 
 *,
@@ -23,49 +57,114 @@
 	box-sizing: border-box;
 }
 
+html {
+	background: var(--color-bg);
+}
+
 body {
 	margin: 0;
-	font-family: Inter, system-ui, sans-serif;
-	background: var(--color-bg);
+	min-height: 100vh;
+	font-family: var(--font-body);
+	font-size: 1.0625rem;
+	background-color: var(--color-bg);
 	color: var(--color-text);
 	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p {
+	margin: 0;
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--font-display);
+	font-weight: 600;
+	line-height: 1.15;
+	text-wrap: balance;
 }
 
 a {
-	color: var(--color-accent);
+	color: inherit;
+	text-underline-offset: 0.16em;
 }
 
 a:has(button) {
 	text-decoration: none;
 }
 
+:focus-visible {
+	outline: 2px solid var(--color-text);
+	outline-offset: 3px;
+}
+
+::selection {
+	background: var(--color-accent);
+	color: var(--color-accent-text);
+}
+
 code {
-	font-family: Inconsolata, monospace;
-	font-size: 0.9em;
-	background: var(--color-surface);
-	padding: 0.1em 0.3em;
-	border-radius: 3px;
+	font-family: var(--font-mono);
+	font-size: 0.86em;
+	background: rgba(247, 241, 232, 0.06);
+	padding: 0.12em 0.35em;
+	border-radius: 4px;
 	border: 1px solid var(--color-border);
 }
 
 button {
 	font-family: inherit;
-	font-size: 0.9rem;
-	padding: 0.4rem 0.9rem;
-	border-radius: var(--radius);
-	border: 1px solid var(--color-border);
-	background: var(--color-surface);
+	font-size: 0.95rem;
+	font-weight: 600;
+	line-height: 1.2;
+	min-height: 2.75rem;
+	padding: 0.55rem 1rem;
+	border-radius: 12px;
+	border: 1px solid rgba(243, 234, 216, 0.38);
+	background: transparent;
 	color: var(--color-text);
 	cursor: pointer;
 }
 
 button:hover:not(:disabled) {
-	background: #3a2a22;
+	background: rgba(243, 234, 216, 0.08);
 }
 
 button:disabled {
-	opacity: 0.6;
 	cursor: not-allowed;
+	opacity: 0.72;
+}
+
+.btn-header {
+	border: 1.5px solid var(--color-gold);
+	border-radius: 999px;
+	background: transparent;
+	color: var(--color-gold);
+	white-space: nowrap;
+	padding-inline: 1.15rem;
+}
+
+.btn-header:hover:not(:disabled) {
+	background: rgba(201, 162, 78, 0.14);
+	border-color: var(--color-gold);
+	color: #e2c27a;
+}
+
+.btn-quiet {
+	border-color: rgba(243, 234, 216, 0.4);
+	color: var(--color-on-bar);
+	background: transparent;
+	border-radius: 999px;
+}
+
+.btn-quiet:hover:not(:disabled) {
+	background: rgba(243, 234, 216, 0.08);
+	border-color: var(--color-text);
 }
 
 input[type="text"],
@@ -74,59 +173,65 @@ textarea,
 input:not([type]) {
 	font-family: inherit;
 	font-size: 1rem;
-	padding: 0.5rem 0.75rem;
+	padding: 0.65rem 0.75rem;
 	border-radius: var(--radius);
 	border: 1px solid var(--color-border);
-	background: #140f0c;
-	color: var(--color-text);
+	background: var(--color-paper);
+	color: var(--color-ink);
 	width: 100%;
 }
 
-input:focus {
-	outline: 2px solid var(--color-accent);
-	outline-offset: -1px;
-}
-
 .card {
-	background: var(--color-bg);
+	background: var(--color-surface);
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius);
-	padding: 1.5rem;
+	padding: var(--space-5);
 	box-shadow: var(--shadow);
 }
 
 dialog {
-	border: 1px solid var(--color-border);
-	border-radius: var(--radius);
-	padding: 1.5rem;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+	border: 1px solid #e0d0ba;
+	border-radius: 12px;
+	padding: var(--space-5);
+	background: var(--color-paper);
+	color: var(--color-ink);
+	box-shadow: var(--shadow);
 	max-width: 400px;
 	width: 100%;
 }
 
 dialog::backdrop {
-	background: rgba(0, 0, 0, 0.4);
+	background: rgba(20, 10, 6, 0.62);
 }
 
-/* ── Shared component classes ───────────────────────────────────────────────
-   Used identically by every framework template, so a component looks the same
-   in React and Svelte. The matching markup uses these classnames. */
-
-/* NetworkPill */
 .network-pill {
-	background-color: #f0f2f5;
-	color: #4a5362;
-	padding: 4px 10px;
-	border-radius: 16px;
-	font-size: 12px;
-	font-weight: bold;
-	display: flex;
+	background: var(--color-olive);
+	color: var(--color-text);
+	border: none;
+	padding: 0 0.85rem;
+	min-height: 2.05rem;
+	border-radius: 999px;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	display: inline-flex;
 	align-items: center;
-	gap: 6px;
+	gap: 0.4rem;
+	white-space: nowrap;
 }
 
-.network-pill--mismatch,
+.network-pill--mismatch {
+	background: #5c2a22;
+	color: #ffe8e2;
+	border-color: #e0a090;
+	cursor: help;
+}
+
 .network-pill--unverified {
+	background: #5c4316;
+	color: #fff1cc;
+	border-color: #e2c27a;
 	cursor: help;
 }
 
@@ -139,38 +244,52 @@ dialog::backdrop {
 }
 
 .network-dot--ok {
-	background-color: #2ed06e;
+	background: #e4efc4;
 }
 
 .network-dot--mismatch {
-	background-color: #ff3b30;
+	background: #ffb4a8;
 }
 
 .network-dot--unverified {
-	background-color: #ffb020;
+	background: #ffe08a;
 }
 
 .network-dot--disconnected {
-	background-color: #c1c7d0;
+	background: #cbbba8;
 }
 
-/* ConnectAccount */
 .connect-account {
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	justify-content: flex-end;
+	gap: var(--space-2);
+	flex-wrap: wrap;
 }
 
-/* WalletButton */
+.connect-meta {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2);
+}
+
+.wallet-slot {
+	display: flex;
+	justify-content: flex-end;
+}
+
 .wallet-connected {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	justify-content: flex-end;
+	gap: var(--space-2);
 }
 
 .wallet-balance {
 	font-size: 0.875rem;
+	font-variant-numeric: tabular-nums;
 	color: var(--color-text-muted);
+	white-space: nowrap;
 }
 
 .wallet-profile {
@@ -184,57 +303,38 @@ dialog::backdrop {
 	font-size: 11px;
 	cursor: help;
 	line-height: 1;
-	color: var(--color-warning);
+	color: #f0d7a4;
 }
 
 .dialog-actions {
 	display: flex;
-	gap: 8px;
+	gap: var(--space-2);
 }
 
 dialog h3 {
-	margin: 0 0 0.75rem;
+	margin: 0 0 var(--space-3);
+	color: var(--color-ink);
 }
 
 dialog p {
-	margin: 0 0 1rem;
-	font-size: 0.875rem;
+	margin: 0 0 var(--space-4);
+	font-size: 0.95rem;
+	color: var(--color-ink-soft);
 }
 
 dialog code {
 	word-break: break-all;
+	background: rgba(43, 28, 20, 0.06);
+	border-color: rgba(43, 28, 20, 0.12);
+	color: var(--color-ink);
 }
 
-/* GuessTheNumber */
-.guess-the-number {
-	margin-bottom: 2rem;
-}
+@media (max-width: 520px) {
+	.connect-account {
+		max-width: 100%;
+	}
 
-.guess-the-number form {
-	display: flex;
-	gap: 1rem;
-	align-items: stretch;
-	margin-bottom: 1rem;
-}
-
-.guess-the-number form input {
-	flex: 1;
-}
-
-.guess-result {
-	padding: 0.5rem 1rem;
-}
-
-.guess-result p {
-	margin: 0;
-}
-
-.guess-result--success {
-	border-color: var(--color-success);
-	color: var(--color-success);
-}
-
-.guess-result--failure {
-	border-color: var(--color-error);
-	color: var(--color-error);
+	.btn-header {
+		padding-inline: 0.75rem;
+	}
 }

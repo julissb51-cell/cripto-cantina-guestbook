@@ -6,11 +6,15 @@ import { WalletButton } from "./WalletButton"
 
 const ConnectAccount: React.FC = () => {
 	return (
-		<div className="connect-account">
-			<NetworkPill />
-			{stellarNetwork !== "PUBLIC" && <FundAccountButton />}
-			<WalletButton />
-		</div>
+		<>
+			<div className="wallet-slot">
+				<WalletButton />
+			</div>
+			<div className="connect-meta">
+				<NetworkPill />
+				{stellarNetwork !== "PUBLIC" && <FundAccountButton />}
+			</div>
+		</>
 	)
 }
 
