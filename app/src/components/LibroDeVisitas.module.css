@@ -1,152 +1,358 @@
 .layout {
-	display: grid;
-	grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
-	gap: 1.5rem;
-	align-items: start;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-7);
 }
 
-.libro,
-.firma {
-	border: 1px solid var(--color-border);
-	border-radius: 16px;
-	padding: 1.5rem;
-}
-
-.libro {
-	background:
-		linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 2.2rem),
-		repeating-linear-gradient(
-			var(--color-paper),
-			var(--color-paper) 2.15rem,
-			#e7d3b4 2.2rem
-		);
+.pagina {
+	position: relative;
+	background-color: var(--color-paper);
 	color: var(--color-ink);
-	box-shadow: var(--shadow);
-	min-height: 22rem;
+	border-radius: 3px 16px 16px 3px;
+	padding: var(--space-5) var(--space-5) var(--space-5)
+		calc(var(--space-5) + 0.35rem);
+	box-shadow:
+		inset 14px 0 18px -16px rgba(48, 24, 10, 0.55),
+		inset 0 1px 0 rgba(255, 252, 247, 0.75),
+		0 16px 36px rgba(8, 4, 2, 0.32);
+	background-image:
+		radial-gradient(rgba(90, 58, 32, 0.045) 0.7px, transparent 0.7px),
+		linear-gradient(180deg, rgba(255, 252, 247, 0.55), transparent 2.75rem);
+	background-size:
+		6px 6px,
+		100% 100%;
 }
 
-.libroHeader h2,
+.pagina::before {
+	content: "";
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: 11px;
+	border-radius: 3px 0 0 3px;
+	background: linear-gradient(90deg, #5c3b28 0%, #a98462 58%, #ead9c2 100%);
+}
+
+.firma {
+	border-top: 3px solid var(--color-accent);
+}
+
+.firma h2,
+.libroHeader h2 {
+	font-size: clamp(1.7rem, 3vw, 2.15rem);
+}
+
 .firma h2 {
-	font-family: var(--font-display);
-	font-weight: 650;
-	font-size: 2rem;
-	margin: 0.15rem 0 0.35rem;
+	color: var(--color-ink);
 }
 
-.libroHeader p,
-.firma > p {
-	margin: 0;
+.lede,
+.pista,
+.contrato {
+	color: var(--color-ink-soft);
+	font-size: 1rem;
 }
 
-.kicker {
+.lede {
+	margin-top: var(--space-3);
+	max-width: 38rem;
+}
+
+.firma label {
+	display: block;
+	margin-top: var(--space-5);
+	margin-bottom: var(--space-2);
+	font-size: 0.78rem;
+	font-weight: 700;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
+	color: var(--color-olive-ink);
+}
+
+.firma textarea {
+	display: block;
+	width: 100%;
+	min-height: 8rem;
+	margin: 0;
+	padding: 0 0.15rem;
+	border: none;
+	border-radius: 0;
+	resize: vertical;
+	background-color: transparent;
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent 0,
+		transparent calc(2rem - 1px),
+		rgba(94, 73, 58, 0.35) calc(2rem - 1px),
+		rgba(94, 73, 58, 0.35) 2rem
+	);
+	background-attachment: local;
+	background-position: 0 -0.625rem;
+	color: var(--color-ink);
+	caret-color: var(--color-accent);
+	font-family: var(--font-display);
+	font-size: 1.2rem;
+	line-height: 2rem;
+	overflow-wrap: anywhere;
+}
+
+.firma textarea::placeholder {
+	color: #6a5142;
+	font-style: italic;
+}
+
+.firma textarea:focus {
+	outline: none;
+}
+
+.firma textarea:focus-visible {
+	outline: 2px solid var(--color-accent);
+	outline-offset: 4px;
+}
+
+.medida {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	margin-top: var(--space-3);
+}
+
+.riel {
+	flex: 1;
+	height: 0.4rem;
+	border-radius: 999px;
+	background: rgba(43, 28, 20, 0.12);
+	overflow: hidden;
+}
+
+.riel span {
+	display: block;
+	height: 100%;
+	border-radius: inherit;
+	background: var(--color-olive);
+}
+
+.medidaAviso .riel span {
+	background: var(--color-accent);
+}
+
+.medidaMal .riel span {
+	background: #8d2c22;
+}
+
+.contador {
+	font-variant-numeric: tabular-nums;
+	font-size: 0.875rem;
+	color: var(--color-ink-soft);
+	white-space: nowrap;
+}
+
+.medidaAviso .contador {
+	color: var(--color-warning);
+	font-weight: 700;
+}
+
+.medidaMal .contador {
+	color: var(--color-error);
+	font-weight: 700;
+}
+
+.banner {
+	margin-top: var(--space-4);
+	padding: var(--space-3) var(--space-4);
+	border-radius: var(--radius);
+	font-size: 0.98rem;
+	line-height: 1.45;
+}
+
+.ya {
+	background: #e7efd8;
+	color: #2c3b1c;
+	border: 1px solid #b7c49a;
+}
+
+.firmando {
+	background: rgba(157, 59, 43, 0.08);
+	color: var(--color-ink);
+	border: 1px dashed var(--color-accent);
+}
+
+.error {
+	background: #f8e2da;
+	color: var(--color-error);
+	border: 1px solid #e3b2a6;
+}
+
+.ok {
+	background: #e3edd6;
+	color: var(--color-success);
+	border: 1px solid #b7c79a;
+}
+
+button.principal {
+	width: 100%;
+	margin-top: var(--space-4);
+	min-height: 3rem;
+	padding: 0.75rem 1rem;
+	border: 1px solid transparent;
+	border-radius: var(--radius);
+	background: var(--color-accent);
+	color: var(--color-accent-text);
+	font-size: 1.05rem;
+	font-weight: 700;
+}
+
+button.principal:hover:not(:disabled) {
+	background: var(--color-accent-hover);
+}
+
+button.principal:disabled {
+	background: #6e3a32;
+	color: #f3d2cb;
+	opacity: 1;
+}
+
+button.secundario {
+	align-self: flex-start;
+	border: 1px solid rgba(43, 28, 20, 0.35);
+	background: transparent;
+	color: var(--color-ink);
+}
+
+button.secundario:hover:not(:disabled) {
+	background: rgba(43, 28, 20, 0.06);
+}
+
+.pista {
+	margin-top: var(--space-4);
+	font-size: 0.95rem;
+}
+
+.contrato {
+	margin-top: var(--space-2);
+	font-size: 0.875rem;
+}
+
+.contrato a {
+	color: var(--color-olive-ink);
+	font-family: var(--font-mono);
+	font-weight: 600;
+}
+
+.libroHeader .kicker {
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
 	font-size: 0.75rem;
-	color: #8a5a32;
+	font-weight: 700;
+	color: var(--color-olive-soft);
+}
+
+.libroHeader h2 {
+	margin-top: var(--space-2);
+	color: var(--color-text);
+}
+
+.libroHeader p:last-child {
+	margin-top: var(--space-2);
+	color: var(--color-text-muted);
+}
+
+.cuerpo {
+	margin-top: var(--space-5);
 }
 
 .entradas {
 	list-style: none;
-	margin: 1.5rem 0 0;
+	margin: 0;
 	padding: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 1.25rem;
+	gap: var(--space-4);
 }
 
-.entradas li {
-	border-top: 1px solid rgba(44, 33, 24, 0.12);
-	padding-top: 0.8rem;
+.paginaTop {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: var(--space-3);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--color-olive-ink);
 }
 
 .entradas blockquote {
 	margin: 0;
 	font-family: var(--font-display);
+	font-size: clamp(1.2rem, 2vw, 1.45rem);
+	font-weight: 500;
+	line-height: 1.45;
+	overflow-wrap: anywhere;
+}
+
+.rubrica {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: var(--space-2);
+	margin-top: var(--space-5);
+	padding-top: var(--space-3);
+	border-top: 1px solid rgba(94, 73, 58, 0.22);
+}
+
+.chip {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2rem;
+	padding: 0.1rem 0.8rem;
+	border-radius: 999px;
+	border: 1px solid #7f8a5c;
+	background: #e4ebd4;
+	color: #2c3b1c;
+	font-family: var(--font-display);
+	font-style: italic;
+	font-weight: 600;
+	font-size: 1.05rem;
+	line-height: 1;
+}
+
+.cuando {
+	font-size: 0.8rem;
+	color: var(--color-ink-soft);
+}
+
+.estado {
+	font-family: var(--font-display);
+	font-style: italic;
 	font-size: 1.25rem;
 	line-height: 1.45;
 }
 
-.entradas footer {
-	display: flex;
-	justify-content: space-between;
-	gap: 1rem;
-	margin-top: 0.45rem;
-	font-size: 0.82rem;
-	color: #6d5644;
-}
-
-.estado {
-	margin-top: 2rem;
-	font-family: var(--font-display);
-	font-size: 1.2rem;
-}
-
-.firma {
-	background: var(--color-surface);
-}
-
-.firma label {
-	display: block;
-	margin: 1.25rem 0 0.4rem;
-	font-size: 0.9rem;
-}
-
-.contador,
-.contadorMal,
-.pista,
-.contrato,
-.error,
-.ok {
-	font-size: 0.85rem;
-}
-
-.contador,
-.pista,
-.contrato {
-	color: var(--color-text-muted);
-}
-
-.contadorMal,
-.error {
-	color: var(--color-error);
-}
-
-.ok {
-	color: var(--color-success);
-}
-
-.principal {
-	background: var(--color-accent);
-	color: #2a160c;
-	border-color: transparent;
-	font-weight: 650;
-	padding: 0.7rem 1rem;
-	width: 100%;
-}
-
-.principal:hover:not(:disabled) {
-	background: #f0a25a;
-}
-
 .alerta {
-	margin-top: 1.5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: 0.75rem;
+	gap: var(--space-4);
 }
 
-.contrato a {
-	font-family: Inconsolata, monospace;
-}
-
-@media (max-width: 800px) {
-	.layout {
-		grid-template-columns: 1fr;
+@media (max-width: 760px) {
+	.pagina {
+		padding: var(--space-4) var(--space-4) var(--space-4)
+			calc(var(--space-4) + 0.45rem);
 	}
 
-	.entradas footer {
+	.medida {
+		align-items: flex-start;
 		flex-direction: column;
-		gap: 0.15rem;
+		gap: var(--space-2);
+	}
+
+	.riel {
+		width: 100%;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.estado {
+		animation: none;
 	}
 }

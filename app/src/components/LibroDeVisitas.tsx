@@ -18,10 +18,10 @@ type Entrada = {
 
 const ERRORES: Record<string, string> = {
 	YaFirmo:
-		"Esta dirección ya dejó su firma. En la Cripto Cantina se firma una sola vez.",
+		"Ya firmaste. En la Cripto Cantina cada dirección deja una sola nota.",
 	MensajeVacio: "Escribe algo antes de firmar. La página en blanco no cuenta.",
 	MensajeMuyLargo: "Esa nota no cabe. El libro solo acepta 140 bytes.",
-	"1": "Esta dirección ya dejó su firma. En la Cripto Cantina se firma una sola vez.",
+	"1": "Ya firmaste. En la Cripto Cantina cada dirección deja una sola nota.",
 	"2": "Escribe algo antes de firmar. La página en blanco no cuenta.",
 	"3": "Esa nota no cabe. El libro solo acepta 140 bytes.",
 }
@@ -72,12 +72,26 @@ export const LibroDeVisitas = () => {
 
 	const usados = bytesDe(borrador)
 	const cabe = usados > 0 && usados <= MAX_BYTES
+	const yaFirmo = Boolean(
+		address && libro.data?.some((entrada) => entrada.autor === address),
+	)
+	const medidaEstado =
+		usados > MAX_BYTES
+			? styles.medidaMal
+			: usados > MAX_BYTES * 0.8
+				? styles.medidaAviso
+				: undefined
+	const progreso = Math.min(100, (usados / MAX_BYTES) * 100)
 
 	const firmar = async () => {
 		setAviso(undefined)
 		setExito(undefined)
 		if (!address) {
 			setAviso("Conecta tu wallet para dejar una firma.")
+			return
+		}
+		if (yaFirmo) {
+			setAviso(ERRORES.YaFirmo)
 			return
 		}
 		if (!cabe) {
@@ -114,89 +128,88 @@ export const LibroDeVisitas = () => {
 
 	return (
 		<div className={styles.layout}>
-			<section className={styles.libro} aria-live="polite">
-				<header className={styles.libroHeader}>
-					<p className={styles.kicker}>Testnet</p>
-					<h2>El libro</h2>
-					<p>
-						{libro.data
-							? `${libro.data.length} ${libro.data.length === 1 ? "firma" : "firmas"} en la barra`
-							: "Las firmas viven en el contrato."}
-					</p>
-				</header>
-
-				{libro.isPending && (
-					<p className={styles.estado}>Pasando las páginas…</p>
-				)}
-				{libro.isError && (
-					<div className={styles.alerta}>
-						<p>No pudimos leer el libro en testnet.</p>
-						<button type="button" onClick={() => void libro.refetch()}>
-							Reintentar
-						</button>
-					</div>
-				)}
-				{libro.data && libro.data.length === 0 && (
-					<p className={styles.estado}>
-						El libro todavía está en blanco. Sé la primera firma de la noche.
-					</p>
-				)}
-				{libro.data && libro.data.length > 0 && (
-					<ol className={styles.entradas}>
-						{libro.data.map((entrada) => (
-							<li key={`${entrada.autor}-${entrada.ledger}`}>
-								<blockquote>{entrada.mensaje}</blockquote>
-								<footer>
-									<span title={entrada.autor}>
-										{shortAddress(entrada.autor)}
-									</span>
-									<span>
-										{fechaDe(entrada.timestamp)} · ledger {entrada.ledger}
-									</span>
-								</footer>
-							</li>
-						))}
-					</ol>
-				)}
-			</section>
-
-			<section className={styles.firma}>
-				<h2>Deja tu firma</h2>
-				<p>
+			<section
+				className={`${styles.pagina} ${styles.firma}`}
+				aria-labelledby="deja-tu-firma"
+			>
+				<h2 id="deja-tu-firma">Deja tu firma</h2>
+				<p className={styles.lede}>
 					Una dirección, un mensaje. La wallet lo autoriza y el contrato lo
 					guarda para siempre en esta instancia.
 				</p>
 				<label htmlFor="mensaje">Tu nota</label>
 				<textarea
 					id="mensaje"
-					rows={5}
+					rows={4}
 					value={borrador}
 					placeholder="La primera ronda va por la casa."
+					aria-describedby="medida-bytes"
+					aria-invalid={usados > MAX_BYTES}
+					disabled={enviando || yaFirmo}
 					onChange={(event) => {
 						setBorrador(event.target.value)
 						setAviso(undefined)
 						setExito(undefined)
 					}}
 				/>
-				<p
-					className={usados > MAX_BYTES ? styles.contadorMal : styles.contador}
-				>
-					{usados} / {MAX_BYTES} bytes
-				</p>
+				<div className={`${styles.medida} ${medidaEstado ?? ""}`}>
+					<div
+						className={styles.riel}
+						role="meter"
+						aria-valuemin={0}
+						aria-valuemax={MAX_BYTES}
+						aria-valuenow={Math.min(usados, MAX_BYTES)}
+						aria-valuetext={`${usados} de ${MAX_BYTES} bytes`}
+						aria-label="Bytes del mensaje"
+					>
+						<span style={{ width: `${progreso}%` }} />
+					</div>
+					<p id="medida-bytes" className={styles.contador}>
+						{usados} / {MAX_BYTES} bytes
+					</p>
+				</div>
+				{yaFirmo && (
+					<p className={`${styles.banner} ${styles.ya}`} role="status">
+						Ya firmaste. En la Cripto Cantina cada dirección deja una sola nota.
+					</p>
+				)}
+				{usados > MAX_BYTES && !aviso && (
+					<p className={`${styles.banner} ${styles.error}`} role="alert">
+						Esa nota no cabe. El libro solo acepta 140 bytes.
+					</p>
+				)}
 				<button
 					type="button"
 					className={styles.principal}
-					disabled={enviando || (!!address && !cabe)}
+					aria-busy={enviando}
+					disabled={
+						enviando || yaFirmo || usados > MAX_BYTES || (!!address && !cabe)
+					}
 					onClick={() => void firmar()}
 				>
 					{enviando
 						? "Firmando…"
-						: address
-							? "Firmar en el libro"
-							: "Conecta tu wallet para firmar"}
+						: yaFirmo
+							? "Ya firmaste"
+							: address
+								? "Firmar el libro"
+								: "Conecta tu wallet para firmar"}
 				</button>
-				{aviso && <p className={styles.error}>{aviso}</p>}
-				{exito && <p className={styles.ok}>{exito}</p>}
+				{enviando && (
+					<p className={`${styles.banner} ${styles.firmando}`} role="status">
+						Firmando… confirma la operación en tu billetera.
+					</p>
+				)}
+				{aviso && (
+					<p className={`${styles.banner} ${styles.error}`} role="alert">
+						{aviso}
+					</p>
+				)}
+				{exito && (
+					<p className={`${styles.banner} ${styles.ok}`} role="status">
+						{exito}
+					</p>
+				)}
 				<p className={styles.pista}>
 					{address
 						? `Firmas como ${shortAddress(address)}.`
@@ -208,6 +221,64 @@ export const LibroDeVisitas = () => {
 						{shortAddress(CONTRACT_ID)}
 					</a>
 				</p>
+			</section>
+
+			<section className={styles.libro} aria-labelledby="el-libro">
+				<header className={styles.libroHeader}>
+					<p className={styles.kicker}>Testnet</p>
+					<h2 id="el-libro">El libro</h2>
+					<p>
+						{libro.data
+							? `${libro.data.length} ${libro.data.length === 1 ? "firma" : "firmas"} en la barra`
+							: "Las firmas viven en el contrato."}
+					</p>
+				</header>
+
+				<div className={styles.cuerpo}>
+					{libro.isPending && (
+						<p className={`${styles.pagina} ${styles.estado}`} role="status">
+							Pasando las páginas…
+						</p>
+					)}
+					{libro.isError && (
+						<div className={`${styles.pagina} ${styles.alerta}`} role="alert">
+							<p>No pudimos leer el libro en testnet.</p>
+							<button
+								type="button"
+								className={styles.secundario}
+								onClick={() => void libro.refetch()}
+							>
+								Reintentar
+							</button>
+						</div>
+					)}
+					{libro.data && libro.data.length === 0 && (
+						<p className={`${styles.pagina} ${styles.estado}`}>
+							El libro todavía está en blanco. Sé la primera firma de la noche.
+						</p>
+					)}
+					{libro.data && libro.data.length > 0 && (
+						<ol className={styles.entradas}>
+							{libro.data.map((entrada, index) => (
+								<li
+									key={`${entrada.autor}-${entrada.ledger}`}
+									className={styles.pagina}
+								>
+									<p className={styles.paginaTop}>pág. {index + 1}</p>
+									<blockquote>{entrada.mensaje}</blockquote>
+									<footer className={styles.rubrica}>
+										<span className={styles.chip} title={entrada.autor}>
+											{shortAddress(entrada.autor)}
+										</span>
+										<span className={styles.cuando}>
+											{fechaDe(entrada.timestamp)} · ledger {entrada.ledger}
+										</span>
+									</footer>
+								</li>
+							))}
+						</ol>
+					)}
+				</div>
 			</section>
 		</div>
 	)

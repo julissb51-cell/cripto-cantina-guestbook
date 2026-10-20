@@ -1,31 +1,66 @@
 .Home {
-	max-width: 1040px;
+	width: min(100%, 42rem);
 	margin: 0 auto;
 }
 
 .intro {
-	margin: 0.5rem 0 2rem;
-	max-width: 40rem;
+	margin: 0 0 var(--space-7);
 }
 
 .kicker {
-	letter-spacing: 0.14em;
+	margin-bottom: var(--space-3);
+	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	font-size: 0.75rem;
-	color: var(--color-accent);
-	margin-bottom: 0.4rem;
+	font-weight: 700;
+	color: var(--color-olive-soft);
 }
 
 .intro h1 {
-	font-family: var(--font-display);
-	font-weight: 650;
-	font-size: clamp(2.1rem, 4vw, 3.4rem);
-	line-height: 1.05;
-	margin: 0 0 0.8rem;
+	font-weight: 600;
+	font-style: italic;
+	font-size: clamp(2.35rem, 6vw, 3.55rem);
+	line-height: 1.08;
+	letter-spacing: -0.02em;
+	color: var(--color-text);
+}
+
+.subtitulo {
+	display: block;
+	margin-top: 0.12em;
+	font-size: 0.74em;
+	font-weight: 500;
+	font-style: italic;
+	letter-spacing: 0;
+	color: var(--color-text);
+}
+
+.rule {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	width: 8.5rem;
+	margin: var(--space-4) 0;
+}
+
+.rule::before,
+.rule::after {
+	content: "";
+	height: 1px;
+	flex: 1;
+	background: rgba(213, 222, 180, 0.7);
+}
+
+.rule span {
+	width: 0.45rem;
+	height: 0.45rem;
+	flex: none;
+	background: var(--color-accent);
+	transform: rotate(45deg);
 }
 
 .intro p:last-child {
-	margin: 0;
+	max-width: 38rem;
 	color: var(--color-text-muted);
-	font-size: 1.05rem;
+	font-size: 1.125rem;
 }

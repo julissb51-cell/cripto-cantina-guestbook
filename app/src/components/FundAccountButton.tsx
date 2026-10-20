@@ -20,11 +20,12 @@ const FundAccountButton: React.FC = () => {
 
 	return (
 		<button
+			className="btn-quiet"
 			disabled={isPending}
 			onClick={handleFundAccount}
 			title="Pide XLM de prueba a Friendbot"
 		>
-			Fondear
+			{isPending ? "Fondeando…" : "Fondear"}
 		</button>
 	)
 }

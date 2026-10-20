@@ -1,8 +1,10 @@
+import styles from "./Debug.module.css"
+
 const CONTRACT_ID = "CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K"
 
 export default function Debug() {
 	return (
-		<div className="debug">
+		<div className={styles.page}>
 			<h2>Explorador</h2>
 			<p>
 				El libro habla con el cliente que genera Scaffold Stellar. Las dos
