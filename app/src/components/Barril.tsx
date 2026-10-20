@@ -1,7 +1,9 @@
 export const Barril = ({ className }: { className?: string }) => (
 	<svg className={className} viewBox="0 0 32 32" aria-hidden="true">
 		<path
-			fill="var(--barril-duela, #4a1a22)"
+			fill="var(--barril-duela, #3a1219)"
+			stroke="var(--barril-borde, #efe3c9)"
+			strokeWidth="1.15"
 			d="M8.2 4.2c-3.4 3.1-3.8 20.2 0 23.6h15.6c3.8-3.4 3.4-20.5 0-23.6H8.2z"
 		/>
 		<path

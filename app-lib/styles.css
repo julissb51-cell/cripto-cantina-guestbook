@@ -1,8 +1,10 @@
 :root {
-	/* Reserva Añeja: página crema, vino en acentos y pie, café en barra y cubierta. */
-	--color-bg: #efe3c9;
-	--color-bg-deep: #e7d8bc;
-	--color-candle: rgba(74, 26, 34, 0.06);
+	/* Reserva Añeja: fondo vino, marco crema, barras en rojo #9a3140. */
+	--color-bg: #4a1a22;
+	--color-bg-deep: #3a1219;
+	--color-candle: rgba(239, 227, 201, 0.08);
+	--color-bar: #9a3140;
+	--color-bar-edge: #7e2634;
 	--color-wood: #7b4b2a;
 	--color-wood-edge: #5c3820;
 	--color-cover: #7b4b2a;
@@ -14,8 +16,8 @@
 	--color-surface: #6a4024;
 	--color-on-bar: #efe3c9;
 	--color-on-bar-muted: #e4d2b0;
-	--color-text: #4a1a22;
-	--color-text-muted: #6b3a28;
+	--color-text: #efe3c9;
+	--color-text-muted: #e4d2b0;
 	--color-border: rgba(74, 26, 34, 0.28);
 	--color-accent: #4a1a22;
 	--color-accent-hover: #3a1219;
@@ -23,7 +25,7 @@
 	--color-olive: #7b4b2a;
 	--color-olive-soft: #e7c98a;
 	--color-olive-ink: #5c2a22;
-	--color-paper: #fbf8f2;
+	--color-paper: #fffaf3;
 	--color-ink: #4a1a22;
 	--color-ink-soft: #6b3a28;
 	--color-success: #3f2416;
@@ -119,14 +121,14 @@ button {
 	min-height: 2.75rem;
 	padding: 0.55rem 1rem;
 	border-radius: var(--radius);
-	border: 1px solid rgba(74, 26, 34, 0.38);
+	border: 1px solid rgba(239, 227, 201, 0.5);
 	background: transparent;
 	color: var(--color-text);
 	cursor: pointer;
 }
 
 button:hover:not(:disabled) {
-	background: rgba(74, 26, 34, 0.06);
+	background: rgba(239, 227, 201, 0.1);
 }
 
 button:disabled {
@@ -135,8 +137,8 @@ button:disabled {
 }
 
 .btn-header {
-	border-color: rgba(239, 227, 201, 0.5);
-	background: rgba(239, 227, 201, 0.08);
+	border-color: rgba(239, 227, 201, 0.78);
+	background: rgba(239, 227, 201, 0.14);
 	color: var(--color-on-bar);
 	white-space: nowrap;
 }
@@ -166,8 +168,8 @@ input:not([type]) {
 	padding: 0.65rem 0.75rem;
 	border-radius: var(--radius);
 	border: 1px solid var(--color-border);
-	background: var(--color-bg-deep);
-	color: var(--color-text);
+	background: var(--color-paper);
+	color: var(--color-ink);
 	width: 100%;
 }
 

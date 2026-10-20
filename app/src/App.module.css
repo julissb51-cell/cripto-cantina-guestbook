@@ -20,13 +20,9 @@
 	column-gap: var(--space-4);
 	row-gap: var(--space-3);
 	padding: var(--space-4) var(--space-6);
-	background-color: var(--color-wood);
-	background-image: linear-gradient(
-		180deg,
-		rgba(239, 227, 201, 0.14),
-		transparent 46%
-	);
-	border-bottom: 1px solid var(--color-wood-edge);
+	background-color: var(--color-bar);
+	background-image: none;
+	border-bottom: 1px solid var(--color-bar-edge);
 	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
 }
 
@@ -49,8 +45,9 @@
 }
 
 .marca {
-	--barril-duela: #4a1a22;
-	--barril-linea: rgba(239, 227, 201, 0.72);
+	--barril-duela: #3a1219;
+	--barril-borde: #efe3c9;
+	--barril-linea: rgba(239, 227, 201, 0.8);
 	--barril-aro: #efe3c9;
 	position: relative;
 	width: 1.9rem;
@@ -78,19 +75,21 @@
 
 .ghostR {
 	--barril-duela: #ff4b6a;
+	--barril-borde: #ffd0da;
 	--barril-linea: rgba(255, 214, 222, 0.9);
 	--barril-aro: #ffd0da;
-	transform: translate(-2.5px, 0);
-	opacity: 0.9;
+	transform: translate(-3.5px, 0);
+	opacity: 1;
 	mix-blend-mode: screen;
 }
 
 .ghostC {
 	--barril-duela: #3ad7ff;
+	--barril-borde: #c8f6ff;
 	--barril-linea: rgba(214, 248, 255, 0.85);
 	--barril-aro: #c8f6ff;
-	transform: translate(2.5px, 0.6px);
-	opacity: 0.85;
+	transform: translate(3.5px, 0.5px);
+	opacity: 1;
 	mix-blend-mode: screen;
 }
 
@@ -133,7 +132,7 @@
 	padding: 0.35rem 0.4rem;
 	border: none;
 	background: transparent;
-	color: var(--color-on-bar-muted);
+	color: var(--color-on-bar);
 	font-size: 0.82rem;
 	font-weight: 700;
 	letter-spacing: 0.12em;
@@ -197,8 +196,8 @@
 }
 
 .footer {
-	background: var(--color-accent);
-	border-top: 1px solid #3a1219;
+	background: var(--color-bar);
+	border-top: 1px solid var(--color-bar-edge);
 	padding: var(--space-4) var(--space-6);
 	display: flex;
 	justify-content: space-between;
@@ -305,7 +304,7 @@
 
 @keyframes glitchR {
 	0% {
-		transform: translate(-2.5px, 0);
+		transform: translate(-3.5px, 0);
 	}
 
 	35% {
@@ -313,17 +312,17 @@
 	}
 
 	70% {
-		transform: translate(-3px, 1px);
+		transform: translate(-4px, 1px);
 	}
 
 	100% {
-		transform: translate(-2.5px, 0);
+		transform: translate(-3.5px, 0);
 	}
 }
 
 @keyframes glitchC {
 	0% {
-		transform: translate(2.5px, 0.6px);
+		transform: translate(3.5px, 0.5px);
 	}
 
 	35% {
@@ -331,11 +330,11 @@
 	}
 
 	70% {
-		transform: translate(3px, -1px);
+		transform: translate(4px, -1px);
 	}
 
 	100% {
-		transform: translate(2.5px, 0.6px);
+		transform: translate(3.5px, 0.5px);
 	}
 }
 
