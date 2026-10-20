@@ -4,6 +4,11 @@ Una dApp de Stellar Sessions, challenge #1. Quien quiera pasa por la barra,
 conecta su wallet y deja un mensaje firmado en Soroban. La página muestra todas
 las firmas.
 
+**En vivo:** https://julissb51-cell.github.io/cripto-cantina-guestbook/
+
+Esa página habla con el contrato de testnet que ya está desplegado. No hace
+falta clonar el repo para dejar una firma.
+
 El proyecto salió de Scaffold Stellar (`stellar scaffold init --template react`)
 y el contrato es propio.
 
@@ -53,6 +58,11 @@ Para compilar el frontend sin el modo watch:
 npm run build --workspace app
 ```
 
+Esa build usa el cliente de testnet ya incluido en `app-lib/clients` (y
+`app/.env.production`). No levanta una red local ni publica el contrato. El
+resultado queda en `app/dist`, con la base `/cripto-cantina-guestbook/` para
+GitHub Pages.
+
 Los tests del contrato:
 
 ```bash
@@ -61,6 +71,14 @@ cargo test -p libro-de-visitas
 
 Cubren firmar, listar (autor, mensaje, ledger y timestamp), `require_auth`, el
 rechazo de una segunda firma y el límite de 140 bytes.
+
+## Página en GitHub Pages
+
+https://julissb51-cell.github.io/cripto-cantina-guestbook/
+
+`.github/workflows/pages.yml` construye el frontend en cada push a `main` y lo
+publica con GitHub Actions. En el repositorio, Pages tiene que usar el origen
+**GitHub Actions** (Settings → Pages → Build and deployment → Source).
 
 ## La página
 
@@ -80,4 +98,5 @@ puede firmar una sola vez: la segunda vez el contrato responde `YaFirmo`.
 - Una misma dirección no vuelve a firmar.
 - El mensaje no puede ir vacío ni pasar de 140 bytes. Es el recado corto de la
   barra.
+
 Proyecto de Juliana Sanabria para el Challenge #1 de Stellar Sessions
