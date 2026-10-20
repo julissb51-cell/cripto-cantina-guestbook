@@ -80,3 +80,4 @@ puede firmar una sola vez: la segunda vez el contrato responde `YaFirmo`.
 - Una misma dirección no vuelve a firmar.
 - El mensaje no puede ir vacío ni pasar de 140 bytes. Es el recado corto de la
   barra.
+Proyecto de Juliana Sanabria para el Challenge #1 de Stellar Sessions
