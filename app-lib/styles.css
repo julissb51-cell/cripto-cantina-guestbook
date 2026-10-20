@@ -1,8 +1,8 @@
 :root {
-	/* Reserva Añeja: vino 50% fondos, café 20% superficies, crema 30% texto y papel. */
-	--color-bg: #4a1a22;
-	--color-bg-deep: #3a1219;
-	--color-candle: rgba(239, 227, 201, 0.09);
+	/* Reserva Añeja: página crema, vino en acentos y pie, café en barra y cubierta. */
+	--color-bg: #efe3c9;
+	--color-bg-deep: #e7d8bc;
+	--color-candle: rgba(74, 26, 34, 0.06);
 	--color-wood: #7b4b2a;
 	--color-wood-edge: #5c3820;
 	--color-cover: #7b4b2a;
@@ -12,23 +12,25 @@
 	--color-foil-deep: #a07c32;
 	--color-foil-line: rgba(240, 212, 138, 0.62);
 	--color-surface: #6a4024;
-	--color-text: #efe3c9;
-	--color-text-muted: #e4d2b0;
-	--color-border: rgba(239, 227, 201, 0.22);
-	--color-accent: #9a3140;
-	--color-accent-hover: #7e2634;
+	--color-on-bar: #efe3c9;
+	--color-on-bar-muted: #e4d2b0;
+	--color-text: #4a1a22;
+	--color-text-muted: #6b3a28;
+	--color-border: rgba(74, 26, 34, 0.28);
+	--color-accent: #4a1a22;
+	--color-accent-hover: #3a1219;
 	--color-accent-text: #efe3c9;
 	--color-olive: #7b4b2a;
 	--color-olive-soft: #e7c98a;
 	--color-olive-ink: #5c2a22;
-	--color-paper: #efe3c9;
+	--color-paper: #fbf8f2;
 	--color-ink: #4a1a22;
 	--color-ink-soft: #6b3a28;
 	--color-success: #3f2416;
 	--color-error: #4a1a22;
 	--color-warning: #6b3a28;
 	--radius: 8px;
-	--shadow: 0 16px 36px rgba(8, 4, 2, 0.32);
+	--shadow: 0 18px 40px rgba(74, 26, 34, 0.16);
 	--font-display:
 		"Lora", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
 	--font-body: "Source Sans 3", "Segoe UI", sans-serif;
@@ -117,14 +119,14 @@ button {
 	min-height: 2.75rem;
 	padding: 0.55rem 1rem;
 	border-radius: var(--radius);
-	border: 1px solid rgba(247, 241, 232, 0.28);
+	border: 1px solid rgba(74, 26, 34, 0.38);
 	background: transparent;
 	color: var(--color-text);
 	cursor: pointer;
 }
 
 button:hover:not(:disabled) {
-	background: rgba(247, 241, 232, 0.08);
+	background: rgba(74, 26, 34, 0.06);
 }
 
 button:disabled {
@@ -133,8 +135,9 @@ button:disabled {
 }
 
 .btn-header {
-	border-color: rgba(247, 241, 232, 0.46);
-	background: rgba(247, 241, 232, 0.06);
+	border-color: rgba(239, 227, 201, 0.5);
+	background: rgba(239, 227, 201, 0.08);
+	color: var(--color-on-bar);
 	white-space: nowrap;
 }
 
@@ -145,7 +148,7 @@ button:disabled {
 
 .btn-quiet {
 	border-color: rgba(239, 227, 201, 0.55);
-	color: var(--color-text);
+	color: var(--color-on-bar);
 	background: transparent;
 }
 

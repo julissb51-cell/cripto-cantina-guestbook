@@ -3,6 +3,7 @@
 	margin: 0 auto;
 	background: var(--color-paper);
 	color: var(--color-ink);
+	border: 1px solid rgba(74, 26, 34, 0.28);
 	border-radius: 12px;
 	padding: var(--space-6) var(--space-5);
 	box-shadow: var(--shadow);
