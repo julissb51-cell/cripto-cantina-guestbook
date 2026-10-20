@@ -1,6 +1,6 @@
 :root {
-	/* Fondo cacao, más claro que el espresso. Papel crema, vino y oro. */
-	--color-bg: #6b4a36;
+	/* Pared crema. Las barras siguen en cacao oscuro. */
+	--color-bg: #f3e9d6;
 	--color-bg-deep: #3c2820;
 	--color-bg-raise: #3a2a20;
 	--color-candle: rgba(243, 234, 216, 0.08);
@@ -16,20 +16,21 @@
 	--color-foil-deep: #8c6a2e;
 	--color-foil-line: rgba(201, 162, 78, 0.55);
 	--color-gold: #e6c97a;
+	--color-gold-ink: #7a5414;
 	--color-wine: #7e3439;
 	--color-surface: #3a2a20;
 	--color-on-bar: #f3ead8;
 	--color-on-bar-muted: #e4d2b8;
-	--color-text: #f3ead8;
-	--color-text-muted: #e4d2b8;
-	--color-border: rgba(243, 234, 216, 0.16);
+	--color-text: #2a1d16;
+	--color-text-muted: #5c4e40;
+	--color-border: rgba(42, 29, 22, 0.16);
 	--color-accent: #7e3439;
 	--color-accent-hover: #692c30;
 	--color-accent-text: #f3ead8;
 	--color-olive: #5e6b3a;
 	--color-olive-soft: #c9a24e;
 	--color-olive-ink: #5a623a;
-	--color-paper: #e8dfcc;
+	--color-paper: #fff8f1;
 	--color-ink: #2a1d16;
 	--color-ink-soft: #5c4e40;
 	--color-success: #3f2416;
@@ -111,7 +112,7 @@ a:has(button) {
 code {
 	font-family: var(--font-mono);
 	font-size: 0.86em;
-	background: rgba(247, 241, 232, 0.06);
+	background: rgba(42, 29, 22, 0.05);
 	padding: 0.12em 0.35em;
 	border-radius: 4px;
 	border: 1px solid var(--color-border);
@@ -125,14 +126,14 @@ button {
 	min-height: 2.75rem;
 	padding: 0.55rem 1rem;
 	border-radius: 12px;
-	border: 1px solid rgba(243, 234, 216, 0.38);
+	border: 1px solid rgba(42, 29, 22, 0.42);
 	background: transparent;
 	color: var(--color-text);
 	cursor: pointer;
 }
 
 button:hover:not(:disabled) {
-	background: rgba(243, 234, 216, 0.08);
+	background: rgba(42, 29, 22, 0.06);
 }
 
 button:disabled {
@@ -164,7 +165,7 @@ button:disabled {
 
 .btn-quiet:hover:not(:disabled) {
 	background: rgba(243, 234, 216, 0.08);
-	border-color: var(--color-text);
+	border-color: var(--color-on-bar);
 }
 
 input[type="text"],
@@ -206,7 +207,7 @@ dialog::backdrop {
 
 .network-pill {
 	background: var(--color-olive);
-	color: var(--color-text);
+	color: var(--color-on-bar);
 	border: none;
 	padding: 0 0.85rem;
 	min-height: 2.05rem;
@@ -288,7 +289,7 @@ dialog::backdrop {
 .wallet-balance {
 	font-size: 0.875rem;
 	font-variant-numeric: tabular-nums;
-	color: var(--color-text-muted);
+	color: var(--color-on-bar-muted);
 	white-space: nowrap;
 }
 
