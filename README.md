@@ -66,14 +66,17 @@ Esa build usa el cliente de testnet ya incluido en `app-lib/clients` (y
 resultado queda en `app/dist`, con la base `/cripto-cantina-guestbook/` para
 GitHub Pages.
 
-Los tests del contrato:
+Los tests del contrato son 9 y pasan todos:
 
 ```bash
 cargo test -p libro-de-visitas
 ```
 
-Cubren firmar, listar (autor, mensaje, ledger y timestamp), `require_auth`, el
-rechazo de una segunda firma y el límite de 140 bytes.
+Cubren el libro en blanco, firmar y listar (autor, mensaje, ledger y
+timestamp), `require_auth` (también si falta la firma o si otra dirección
+intenta firmar), el orden de dos mensajes, el evento `firma`, el rechazo de
+una segunda firma de la misma dirección y el tope de 140 bytes: el mensaje
+vacío y el de 141 se rechazan, y uno de 140 entra.
 
 ## Página en GitHub Pages
 
@@ -85,7 +88,9 @@ publica con GitHub Actions. En el repositorio, Pages tiene que usar el origen
 
 ## La página
 
-![Libro de visitas leyendo las firmas de testnet](docs/captura-cripto-cantina.png)
+![Portada en crema, con el hero y el libro abierto](docs/captura-cripto-cantina.png)
+
+![Libro abierto, a la espera de la primera firma](docs/captura-libro-abierto.png)
 
 La portada se abre con **Abrir el libro**. Las firmas quedan en las páginas y la
 nota nueva se escribe en la última.
