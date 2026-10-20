@@ -1,7 +1,7 @@
 import { useLocale } from "../i18n"
 import styles from "./Debug.module.css"
 
-const CONTRACT_ID = "CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K"
+const CONTRACT_ID = "CC3KM7M4JW6ZXSMTF4X77JQP57LIIHQBBBCGPUX7ZAGGR3IWPJA7JCGB"
 
 export default function Debug() {
 	const { t } = useLocale()

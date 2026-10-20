@@ -14,18 +14,21 @@ y el contrato es propio.
 
 ## Contrato en testnet
 
-**ID:** `CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K`
+**ID:** `CC3KM7M4JW6ZXSMTF4X77JQP57LIIHQBBBCGPUX7ZAGGR3IWPJA7JCGB`
 
 **Explorador:**
-https://stellar.expert/explorer/testnet/contract/CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K
+https://stellar.expert/explorer/testnet/contract/CC3KM7M4JW6ZXSMTF4X77JQP57LIIHQBBBCGPUX7ZAGGR3IWPJA7JCGB
 
-Lo publicó la identidad `deployer`
-(`GBXEG2IZJ6NS6HCZTOK65A76UD2PKKH2XYS7QH2C7CNRQSWLBTJMS3PX`). Scaffold Stellar
-la creó y Friendbot la fondeó al desplegar con
-`stellar scaffold build --network testnet --build-clients`.
+Es una instancia nueva, sin firmas de prueba. La publicó la identidad
+`cripto-cantina-deployer`
+(`GBIUQ2QDPHKHRNEZPNIMQSR4HVQUX4HXTUQ4TDCQVVRSVOGG5RSYTXZ4`); Friendbot la
+fondeó. La clave secreta no está en el repositorio.
 
 `scaffold.yml` apunta la red `testnet` a ese ID, así que el cliente generado no
 publica otra instancia.
+
+La instancia anterior de prueba era
+`CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K`.
 
 ## Cómo correrlo
 

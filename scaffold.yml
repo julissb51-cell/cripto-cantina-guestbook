@@ -12,8 +12,8 @@ networks:
   local:
     accounts: [me]
 
-  # Testnet apunta al contrato ya desplegado. `deployer` es la identidad
-  # que lo publicó; Friendbot la fondeó en ese build.
+  # Testnet apunta a la instancia vacía ya desplegada. `deployer` solo
+  # se usa si alguien vuelve a publicar con `type: workspace`.
   testnet:
     accounts: [deployer]
     allow-deploy: true
@@ -28,4 +28,4 @@ contracts:
       # quieres publicar otra instancia.
       testnet:
         type: contract
-        source: CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K
+        source: CC3KM7M4JW6ZXSMTF4X77JQP57LIIHQBBBCGPUX7ZAGGR3IWPJA7JCGB
