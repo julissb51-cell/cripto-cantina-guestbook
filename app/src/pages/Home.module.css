@@ -123,18 +123,19 @@
 	display: flex;
 	align-items: baseline;
 	gap: 0.55rem;
-	color: #efe4d2;
-	font-size: 0.98rem;
+	color: #f7f1e4;
+	font-size: 1.05rem;
+	font-weight: 700;
 }
 
 .statNum,
 .statInf {
 	font-family: var(--font-display);
 	font-style: italic;
-	font-weight: 560;
-	font-size: 1.85rem;
+	font-weight: 650;
+	font-size: 1.95rem;
 	line-height: 1;
-	color: var(--color-text);
+	color: #fff8ee;
 }
 
 .seccion {
@@ -147,7 +148,7 @@
 	margin: 0 auto;
 }
 
-.seccion h2 {
+.seccion > .interior > h2 {
 	max-width: 16ch;
 	font-size: clamp(2.4rem, 5vw, 4.1rem);
 	font-weight: 560;
@@ -156,7 +157,7 @@
 	color: var(--color-text);
 }
 
-.seccion h2 em {
+.seccion > .interior > h2 em {
 	font-style: italic;
 	font-weight: 500;
 }
@@ -299,15 +300,17 @@
 
 .cuentaLibro {
 	margin: 0.7rem 0 1.6rem;
-	color: var(--color-text-muted);
-	font-size: 1.05rem;
+	color: #f7f1e4;
+	font-size: 1.15rem;
+	font-weight: 700;
 }
 
 .cuentaLibro span {
 	font-family: var(--font-display);
 	font-style: italic;
-	font-size: 1.35rem;
-	color: var(--color-text);
+	font-weight: 650;
+	font-size: 1.6rem;
+	color: #fff8ee;
 }
 
 .contrato h2 {

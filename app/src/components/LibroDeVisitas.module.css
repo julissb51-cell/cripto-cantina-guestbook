@@ -197,7 +197,7 @@
 	font-weight: 700;
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
-	color: #5f6840;
+	color: #3e4a24;
 }
 
 .hoja blockquote {
@@ -235,7 +235,7 @@
 
 .cuando {
 	font-size: 0.78rem;
-	color: #6e6254;
+	color: #4a3f34;
 }
 
 .estado {
@@ -287,13 +287,13 @@
 	box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
 }
 
-.firma h2 {
+.hoja.firma h2 {
 	max-width: 12ch;
 	font-size: clamp(2rem, 3vw, 2.7rem);
-	font-weight: 560;
+	font-weight: 600;
 	letter-spacing: -0.03em;
 	line-height: 1.02;
-	color: var(--color-ink);
+	color: #2a1d16;
 }
 
 .lede,
@@ -341,7 +341,7 @@
 }
 
 .firma textarea::placeholder {
-	color: #8d8474;
+	color: #5c4e40;
 	font-style: italic;
 }
 
@@ -376,7 +376,7 @@
 .contador {
 	font-variant-numeric: tabular-nums;
 	font-size: 0.85rem;
-	color: #6e6254;
+	color: #4a3f34;
 	white-space: nowrap;
 }
 
