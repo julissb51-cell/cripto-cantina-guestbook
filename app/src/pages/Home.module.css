@@ -9,41 +9,15 @@
 	font-weight: 700;
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
-	color: var(--color-gold);
+	color: var(--color-gold-ink);
 }
 
 .hero {
-	--foto: none;
 	position: relative;
 	display: flex;
-	align-items: flex-end;
-	min-height: 100svh;
-	margin-top: -4.85rem;
-	padding: 8.5rem 4vw 4.5rem;
-	background-color: #1c140f;
-	background-image:
-		linear-gradient(
-			180deg,
-			rgba(16, 10, 7, 0.5) 0%,
-			rgba(16, 10, 7, 0.05) 16%,
-			rgba(16, 10, 7, 0) 58%,
-			rgba(40, 27, 20, 0.45) 84%,
-			#281b14 100%
-		),
-		linear-gradient(
-			90deg,
-			rgba(14, 9, 6, 0.84) 0%,
-			rgba(14, 9, 6, 0.5) 30%,
-			rgba(14, 9, 6, 0.05) 58%,
-			rgba(14, 9, 6, 0.16) 100%
-		),
-		var(--foto);
-	background-size: cover;
-	background-position:
-		center,
-		center,
-		center 46%;
-	background-repeat: no-repeat;
+	align-items: center;
+	padding: 3.4rem 4vw 3.2rem;
+	background: transparent;
 }
 
 .heroInner {
@@ -68,7 +42,7 @@
 
 .heroOro {
 	display: block;
-	color: var(--color-gold);
+	color: var(--color-gold-ink);
 }
 
 .heroLede {
@@ -76,7 +50,7 @@
 	margin-top: 1.4rem;
 	font-size: 1.05rem;
 	line-height: 1.55;
-	color: #efe4d2;
+	color: var(--color-text-muted);
 }
 
 .heroAcciones {
@@ -102,8 +76,8 @@
 
 .contorno {
 	background: transparent !important;
-	color: var(--color-gold) !important;
-	border: 1.5px solid var(--color-gold) !important;
+	color: var(--color-gold-ink) !important;
+	border: 1.5px solid var(--color-gold-ink) !important;
 }
 
 .contorno:hover:not(:disabled) {
@@ -123,7 +97,7 @@
 	display: flex;
 	align-items: baseline;
 	gap: 0.55rem;
-	color: #f7f1e4;
+	color: var(--color-text);
 	font-size: 1.05rem;
 	font-weight: 700;
 }
@@ -135,7 +109,7 @@
 	font-weight: 650;
 	font-size: 1.95rem;
 	line-height: 1;
-	color: #fff8ee;
+	color: var(--color-text);
 }
 
 .seccion {
@@ -187,11 +161,12 @@
 .pasoCrema {
 	background-color: var(--color-paper);
 	background-image:
-		linear-gradient(rgba(232, 223, 204, 0.9), rgba(232, 223, 204, 0.9)),
+		linear-gradient(rgba(255, 248, 241, 0.94), rgba(255, 248, 241, 0.94)),
 		url("../assets/grano.webp");
 	background-size: auto, 160px;
 	color: var(--color-ink);
-	box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+	border: 1px solid #c8b08a;
+	box-shadow: 0 12px 28px rgba(62, 40, 22, 0.16);
 }
 
 .pasoCrema::before,
@@ -229,11 +204,11 @@
 
 .pasoOscuro {
 	background: var(--color-bg-raise);
-	color: var(--color-text);
+	color: var(--color-on-bar);
 }
 
 .pasoOscuro p:last-child {
-	color: var(--color-text-muted);
+	color: var(--color-on-bar-muted);
 }
 
 .numero {
@@ -251,7 +226,7 @@
 
 .pasoVino {
 	background: var(--color-wine);
-	color: var(--color-text);
+	color: var(--color-on-bar);
 	padding-right: 3.4rem;
 }
 
@@ -283,7 +258,7 @@
 
 .cuentaLibro {
 	margin: 0.7rem 0 1.6rem;
-	color: #f7f1e4;
+	color: var(--color-text);
 	font-size: 1.15rem;
 	font-weight: 700;
 }
@@ -293,7 +268,7 @@
 	font-style: italic;
 	font-weight: 650;
 	font-size: 1.6rem;
-	color: #fff8ee;
+	color: var(--color-text);
 }
 
 .contrato h2 {
@@ -306,8 +281,8 @@
 	padding: 0.85rem 1rem;
 	overflow-wrap: anywhere;
 	color: var(--color-text);
-	background: rgba(243, 234, 216, 0.06);
-	border-color: rgba(243, 234, 216, 0.16);
+	background: rgba(42, 29, 22, 0.05);
+	border-color: rgba(42, 29, 22, 0.16);
 }
 
 .contratoLinks {
@@ -323,8 +298,8 @@
 	min-height: 2.75rem;
 	padding: 0.45rem 1rem;
 	border-radius: 999px;
-	border: 1.5px solid var(--color-gold);
-	color: var(--color-gold);
+	border: 1.5px solid var(--color-gold-ink);
+	color: var(--color-gold-ink);
 	text-decoration: none;
 	font-weight: 650;
 	font-size: 0.95rem;
@@ -337,9 +312,8 @@
 @media (max-width: 760px) {
 	.hero {
 		align-items: flex-start;
-		min-height: 0;
-		padding-top: 7.2rem;
-		padding-bottom: 3rem;
+		padding-top: 2.2rem;
+		padding-bottom: 2.4rem;
 	}
 
 	.hero h1 {

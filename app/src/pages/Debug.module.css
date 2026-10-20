@@ -3,14 +3,15 @@
 	margin: 6rem auto 3rem;
 	background-color: var(--color-paper);
 	background-image:
-		linear-gradient(rgba(232, 223, 204, 0.92), rgba(232, 223, 204, 0.92)),
+		linear-gradient(rgba(255, 248, 241, 0.94), rgba(255, 248, 241, 0.94)),
 		url("../assets/grano.webp");
 	background-size: auto, 160px;
 	color: var(--color-ink);
 	border-radius: 22px;
+	border: 1px solid #c8b08a;
 	border-left: 8px solid var(--color-cafe);
 	padding: var(--space-6) var(--space-5);
-	box-shadow: var(--shadow);
+	box-shadow: 0 16px 34px rgba(62, 40, 22, 0.16);
 }
 
 .page h2 {
