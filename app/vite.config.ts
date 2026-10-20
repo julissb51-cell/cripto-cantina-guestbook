@@ -26,6 +26,9 @@ export default defineConfig({
 	},
 	envPrefix: "PUBLIC_",
 	server: {
+		host: "0.0.0.0",
+		port: 43117,
+		strictPort: true,
 		proxy: {
 			"/friendbot": {
 				target: "http://localhost:8000/friendbot",

@@ -25,7 +25,10 @@ export async function fundAccount(
 	try {
 		const response = await fetch(getFriendbotUrl(address))
 		if (response.ok) {
-			return { ok: true, message: "Account funded successfully!" }
+			return {
+				ok: true,
+				message: "Friendbot ya dejó XLM de prueba en la cuenta.",
+			}
 		}
 		const body: unknown = await response.json()
 		if (
@@ -34,10 +37,13 @@ export async function fundAccount(
 			"detail" in body &&
 			typeof body.detail === "string"
 		) {
-			return { ok: false, message: `Error funding account: ${body.detail}` }
+			return { ok: false, message: `Friendbot no pudo fondear: ${body.detail}` }
 		}
-		return { ok: false, message: "Error funding account: Unknown error" }
+		return { ok: false, message: "Friendbot no pudo fondear la cuenta." }
 	} catch {
-		return { ok: false, message: "Error funding account. Please try again." }
+		return {
+			ok: false,
+			message: "No hubo respuesta de Friendbot. Inténtalo de nuevo.",
+		}
 	}
 }

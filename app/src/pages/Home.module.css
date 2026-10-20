@@ -1,36 +1,31 @@
 .Home {
-	max-width: 900px;
+	max-width: 1040px;
 	margin: 0 auto;
 }
 
-.Home > div:first-child {
-	text-align: center;
-	margin: 4rem auto;
-	max-width: 560px;
+.intro {
+	margin: 0.5rem 0 2rem;
+	max-width: 40rem;
 }
 
-.Home h1 {
-	font-weight: normal;
+.kicker {
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	color: var(--color-accent);
+	margin-bottom: 0.4rem;
 }
 
-.Home :global(.card) {
-	margin-bottom: 2rem;
+.intro h1 {
+	font-family: var(--font-display);
+	font-weight: 650;
+	font-size: clamp(2.1rem, 4vw, 3.4rem);
+	line-height: 1.05;
+	margin: 0 0 0.8rem;
 }
 
-.contractNav {
-	display: flex;
-	gap: 1rem;
-	margin: 1rem 0;
-	flex-wrap: wrap;
-}
-
-.cards {
-	display: flex;
-	gap: 2rem;
-	margin-bottom: 2rem;
-}
-
-.cards :global(.card) {
-	flex: 1;
-	margin-bottom: 0;
+.intro p:last-child {
+	margin: 0;
+	color: var(--color-text-muted);
+	font-size: 1.05rem;
 }

@@ -1,9 +1,11 @@
-import { labPrefix } from "@stellar-scaffold/app-lib"
 import { NavLink, Outlet, Route, Routes } from "react-router-dom"
 import styles from "./App.module.css"
 import ConnectAccount from "./components/ConnectAccount"
 import Debug from "./pages/Debug"
 import Home from "./pages/Home"
+
+const CONTRACT_ID = "CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K"
+const EXPERT_URL = `https://stellar.expert/explorer/testnet/contract/${CONTRACT_ID}`
 
 function App() {
 	return (
@@ -11,7 +13,6 @@ function App() {
 			<Route element={<AppLayout />}>
 				<Route path="/" element={<Home />} />
 				<Route path="/debug" element={<Debug />} />
-				<Route path="/debug/:contractName" element={<Debug />} />
 			</Route>
 		</Routes>
 	)
@@ -20,16 +21,18 @@ function App() {
 const AppLayout = () => (
 	<div className={styles.AppLayout}>
 		<header className={styles.header}>
-			<span className={styles.logo}>Scaffold</span>
+			<NavLink to="/" className={styles.logo}>
+				Cripto Cantina
+			</NavLink>
 			<nav className={styles.headerNav}>
 				<NavLink
 					to="/debug"
 					className={({ isActive }) => (isActive ? styles.active : "")}
 				>
-					Contract Explorer
+					Explorador
 				</NavLink>
-				<a href={labPrefix()} target="_blank" rel="noreferrer">
-					Transaction Explorer
+				<a href={EXPERT_URL} target="_blank" rel="noreferrer">
+					Contrato
 				</a>
 			</nav>
 			<ConnectAccount />
@@ -40,23 +43,17 @@ const AppLayout = () => (
 		</main>
 
 		<footer className={styles.footer}>
+			<p>Una firma por dirección, guardada en Stellar testnet.</p>
 			<nav className={styles.footerNav}>
+				<a href={EXPERT_URL} target="_blank" rel="noreferrer">
+					stellar.expert
+				</a>
 				<a
-					href="https://github.com/stellar-scaffold/cli"
+					href="https://stellarscaffold.org/docs/quick-start"
 					target="_blank"
 					rel="noreferrer"
 				>
-					GitHub
-				</a>
-				<a
-					href="https://www.youtube.com/watch?v=0syGaIn3ULk&list=PLmr3tp_7-7Gjj6gn5-bBn-QTMyaWzwOU5"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Tutorial
-				</a>
-				<a href="https://scaffoldstellar.org" target="_blank" rel="noreferrer">
-					View docs
+					Scaffold Stellar
 				</a>
 			</nav>
 		</footer>

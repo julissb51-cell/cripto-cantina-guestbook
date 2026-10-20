@@ -1,0 +1,152 @@
+.layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+	gap: 1.5rem;
+	align-items: start;
+}
+
+.libro,
+.firma {
+	border: 1px solid var(--color-border);
+	border-radius: 16px;
+	padding: 1.5rem;
+}
+
+.libro {
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 2.2rem),
+		repeating-linear-gradient(
+			var(--color-paper),
+			var(--color-paper) 2.15rem,
+			#e7d3b4 2.2rem
+		);
+	color: var(--color-ink);
+	box-shadow: var(--shadow);
+	min-height: 22rem;
+}
+
+.libroHeader h2,
+.firma h2 {
+	font-family: var(--font-display);
+	font-weight: 650;
+	font-size: 2rem;
+	margin: 0.15rem 0 0.35rem;
+}
+
+.libroHeader p,
+.firma > p {
+	margin: 0;
+}
+
+.kicker {
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	color: #8a5a32;
+}
+
+.entradas {
+	list-style: none;
+	margin: 1.5rem 0 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.entradas li {
+	border-top: 1px solid rgba(44, 33, 24, 0.12);
+	padding-top: 0.8rem;
+}
+
+.entradas blockquote {
+	margin: 0;
+	font-family: var(--font-display);
+	font-size: 1.25rem;
+	line-height: 1.45;
+}
+
+.entradas footer {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-top: 0.45rem;
+	font-size: 0.82rem;
+	color: #6d5644;
+}
+
+.estado {
+	margin-top: 2rem;
+	font-family: var(--font-display);
+	font-size: 1.2rem;
+}
+
+.firma {
+	background: var(--color-surface);
+}
+
+.firma label {
+	display: block;
+	margin: 1.25rem 0 0.4rem;
+	font-size: 0.9rem;
+}
+
+.contador,
+.contadorMal,
+.pista,
+.contrato,
+.error,
+.ok {
+	font-size: 0.85rem;
+}
+
+.contador,
+.pista,
+.contrato {
+	color: var(--color-text-muted);
+}
+
+.contadorMal,
+.error {
+	color: var(--color-error);
+}
+
+.ok {
+	color: var(--color-success);
+}
+
+.principal {
+	background: var(--color-accent);
+	color: #2a160c;
+	border-color: transparent;
+	font-weight: 650;
+	padding: 0.7rem 1rem;
+	width: 100%;
+}
+
+.principal:hover:not(:disabled) {
+	background: #f0a25a;
+}
+
+.alerta {
+	margin-top: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.75rem;
+}
+
+.contrato a {
+	font-family: Inconsolata, monospace;
+}
+
+@media (max-width: 800px) {
+	.layout {
+		grid-template-columns: 1fr;
+	}
+
+	.entradas footer {
+		flex-direction: column;
+		gap: 0.15rem;
+	}
+}

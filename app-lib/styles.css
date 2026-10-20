@@ -1,17 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Inconsolata:wght@500&display=swap");
 
 :root {
-	--color-bg: #ffffff;
-	--color-surface: #f8f9fa;
-	--color-text: #1a1a2e;
-	--color-text-muted: #6c757d;
-	--color-border: #dee2e6;
-	--color-accent: #7b61ff;
-	--color-success: #198754;
-	--color-error: #dc3545;
-	--color-warning: #f0ad4e;
-	--radius: 6px;
-	--shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	--color-bg: #1b1410;
+	--color-surface: #2a1e18;
+	--color-text: #f6efe4;
+	--color-text-muted: #cbbba8;
+	--color-border: #4a372c;
+	--color-accent: #e08a3c;
+	--color-success: #8fbf7a;
+	--color-error: #e07a6a;
+	--color-warning: #e0b15a;
+	--color-paper: #f4e7d0;
+	--color-ink: #2c2118;
+	--radius: 10px;
+	--shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+	--font-display: "Fraunces", Georgia, serif;
 }
 
 *,
@@ -57,7 +60,7 @@ button {
 }
 
 button:hover:not(:disabled) {
-	background: var(--color-border);
+	background: #3a2a22;
 }
 
 button:disabled {
@@ -67,13 +70,14 @@ button:disabled {
 
 input[type="text"],
 input[type="number"],
+textarea,
 input:not([type]) {
 	font-family: inherit;
 	font-size: 1rem;
 	padding: 0.5rem 0.75rem;
 	border-radius: var(--radius);
 	border: 1px solid var(--color-border);
-	background: var(--color-bg);
+	background: #140f0c;
 	color: var(--color-text);
 	width: 100%;
 }
