@@ -13,5 +13,5 @@ export const options = {
 
 export const libroDeVisitas = new LibroDeVisitas({
 	...options,
-	contractId: "CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K",
+	contractId: "CC3KM7M4JW6ZXSMTF4X77JQP57LIIHQBBBCGPUX7ZAGGR3IWPJA7JCGB",
 })

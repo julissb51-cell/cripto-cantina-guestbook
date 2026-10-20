@@ -171,16 +171,17 @@
 
 .pasos {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 1.25rem;
-	margin-top: 2.2rem;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 0.85rem;
+	margin-top: 1.35rem;
+	align-items: stretch;
 }
 
 .paso {
 	position: relative;
-	border-radius: 26px;
-	padding: 1.6rem 1.7rem 1.7rem;
-	min-height: 16rem;
+	border-radius: 18px;
+	padding: 0.95rem 1rem 1rem 1.15rem;
+	min-height: 0;
 }
 
 .pasoCrema {
@@ -200,8 +201,8 @@
 	top: 0;
 	bottom: 0;
 	left: 0;
-	width: 8px;
-	border-radius: 26px 0 0 26px;
+	width: 6px;
+	border-radius: 18px 0 0 18px;
 	background: var(--color-cafe);
 }
 
@@ -210,17 +211,16 @@
 }
 
 .paso h3 {
-	margin-top: 0.35rem;
-	font-size: clamp(1.55rem, 2vw, 1.9rem);
+	margin-top: 0.15rem;
+	font-size: clamp(1.12rem, 1.25vw, 1.32rem);
 	font-weight: 560;
 	letter-spacing: -0.02em;
 }
 
 .paso p:last-child {
-	margin-top: 0.55rem;
-	font-size: 0.98rem;
-	line-height: 1.5;
-	max-width: 32rem;
+	margin-top: 0.35rem;
+	font-size: 0.86rem;
+	line-height: 1.4;
 }
 
 .pasoCrema p:last-child {
@@ -240,7 +240,7 @@
 	font-family: var(--font-display);
 	font-style: italic;
 	font-weight: 500;
-	font-size: clamp(3.2rem, 5vw, 4.4rem);
+	font-size: clamp(1.85rem, 2.4vw, 2.45rem);
 	line-height: 0.9;
 	color: var(--color-wine);
 }
@@ -250,13 +250,9 @@
 }
 
 .pasoVino {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1.5rem;
-	margin-top: 1.25rem;
 	background: var(--color-wine);
 	color: var(--color-text);
+	padding-right: 3.4rem;
 }
 
 .pasoVino p:last-child {
@@ -264,34 +260,21 @@
 }
 
 .lapiz {
-	flex: none;
+	position: absolute;
+	top: 0.85rem;
+	right: 0.7rem;
 	display: grid;
 	place-items: center;
-	width: 4.4rem;
-	height: 4.4rem;
+	width: 2.45rem;
+	height: 2.45rem;
 	border-radius: 50%;
 	border: 1.5px solid var(--color-gold);
 	color: var(--color-gold);
 }
 
 .lapiz svg {
-	width: 1.45rem;
-	height: 1.45rem;
-}
-
-.citaBloque {
-	margin: 2.6rem 0 0.4rem;
-}
-
-.cita {
-	max-width: 22em;
-	font-family: var(--font-display);
-	font-style: italic;
-	font-weight: 500;
-	font-size: clamp(1.8rem, 3.5vw, 2.85rem);
-	line-height: 1.22;
-	letter-spacing: -0.02em;
-	color: var(--color-text);
+	width: 1.05rem;
+	height: 1.05rem;
 }
 
 .tituloLibro {
@@ -365,10 +348,7 @@
 
 	.pasos {
 		grid-template-columns: 1fr;
-	}
-
-	.pasoVino {
-		align-items: flex-start;
+		gap: 0.7rem;
 	}
 
 	.seccion {

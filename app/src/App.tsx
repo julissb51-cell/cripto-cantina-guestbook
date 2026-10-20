@@ -7,7 +7,7 @@ import { useLocale, type Locale } from "./i18n"
 import Debug from "./pages/Debug"
 import Home from "./pages/Home"
 
-const CONTRACT_ID = "CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K"
+const CONTRACT_ID = "CC3KM7M4JW6ZXSMTF4X77JQP57LIIHQBBBCGPUX7ZAGGR3IWPJA7JCGB"
 const EXPERT_URL = `https://stellar.expert/explorer/testnet/contract/${CONTRACT_ID}`
 
 function App() {

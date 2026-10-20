@@ -9,7 +9,7 @@ import {
 import { useLocale } from "../i18n"
 import styles from "./Home.module.css"
 
-const CONTRACT_ID = "CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K"
+const CONTRACT_ID = "CC3KM7M4JW6ZXSMTF4X77JQP57LIIHQBBBCGPUX7ZAGGR3IWPJA7JCGB"
 const EXPERT_URL = `https://stellar.expert/explorer/testnet/contract/${CONTRACT_ID}`
 const HERO = `${import.meta.env.BASE_URL}assets/cantina-hero.webp`
 
@@ -43,7 +43,6 @@ const Home = () => {
 	const libroRef = useRef<LibroControl>(null)
 	const libro = useEntradas()
 	const total = libro.data?.length
-	const ultima = libro.data?.at(-1)
 
 	const irAlLibro = (destino: LibroDestino) => {
 		libroRef.current?.abrirEn(destino)
@@ -119,25 +118,17 @@ const Home = () => {
 							<h3>{t.step2Title}</h3>
 							<p>{t.step2Body}</p>
 						</article>
+						<article className={`${styles.paso} ${styles.pasoVino}`}>
+							<div>
+								<p className={`${styles.numero} ${styles.numeroOro}`}>03</p>
+								<h3>{t.step3Title}</h3>
+								<p>{t.step3Body}</p>
+							</div>
+							<span className={styles.lapiz} aria-hidden="true">
+								<Lapiz />
+							</span>
+						</article>
 					</div>
-
-					<blockquote className={styles.citaBloque}>
-						<p className={styles.eyebrow}>{t.quoteEyebrow}</p>
-						<p className={styles.cita} translate={ultima ? "no" : undefined}>
-							{ultima ? `“${ultima.mensaje}”` : t.quoteEmpty}
-						</p>
-					</blockquote>
-
-					<article className={`${styles.paso} ${styles.pasoVino}`}>
-						<div>
-							<p className={`${styles.numero} ${styles.numeroOro}`}>03</p>
-							<h3>{t.step3Title}</h3>
-							<p>{t.step3Body}</p>
-						</div>
-						<span className={styles.lapiz} aria-hidden="true">
-							<Lapiz />
-						</span>
-					</article>
 				</div>
 			</section>
 
