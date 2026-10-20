@@ -1,66 +1,14 @@
 .Home {
-	width: min(100%, 42rem);
+	width: 100%;
 	margin: 0 auto;
 }
 
-.intro {
-	margin: 0 0 var(--space-7);
-}
-
 .kicker {
-	margin-bottom: var(--space-3);
+	margin-bottom: var(--space-5);
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	font-size: 0.75rem;
 	font-weight: 700;
 	color: var(--color-olive-soft);
-}
-
-.intro h1 {
-	font-weight: 600;
-	font-style: italic;
-	font-size: clamp(2.35rem, 6vw, 3.55rem);
-	line-height: 1.08;
-	letter-spacing: -0.02em;
-	color: var(--color-text);
-}
-
-.subtitulo {
-	display: block;
-	margin-top: 0.12em;
-	font-size: 0.74em;
-	font-weight: 500;
-	font-style: italic;
-	letter-spacing: 0;
-	color: var(--color-text);
-}
-
-.rule {
-	display: flex;
-	align-items: center;
-	gap: var(--space-3);
-	width: 8.5rem;
-	margin: var(--space-4) 0;
-}
-
-.rule::before,
-.rule::after {
-	content: "";
-	height: 1px;
-	flex: 1;
-	background: rgba(213, 222, 180, 0.7);
-}
-
-.rule span {
-	width: 0.45rem;
-	height: 0.45rem;
-	flex: none;
-	background: var(--color-accent);
-	transform: rotate(45deg);
-}
-
-.intro p:last-child {
-	max-width: 38rem;
-	color: var(--color-text-muted);
-	font-size: 1.125rem;
+	text-align: center;
 }

@@ -4,9 +4,11 @@ import {
 	shortAddress,
 } from "@stellar-scaffold/app-lib"
 import { useWallet } from "../hooks/useWallet"
+import { useLocale } from "../i18n"
 
 export const WalletButton = () => {
 	const { address, isPending, balances } = useWallet()
+	const { t } = useLocale()
 
 	if (!address) {
 		return (
@@ -15,7 +17,7 @@ export const WalletButton = () => {
 				onClick={() => void connectWallet()}
 				disabled={isPending}
 			>
-				{isPending ? "Conectando…" : "Conectar billetera"}
+				{isPending ? t.connecting : t.connect}
 			</button>
 		)
 	}

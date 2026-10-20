@@ -5,11 +5,11 @@
 }
 
 :global(body) {
-	background-color: #1a110d;
+	background-color: var(--color-bg);
 	background-image:
 		radial-gradient(
 			ellipse 90% 42% at 50% -8%,
-			rgba(214, 146, 78, 0.3),
+			var(--color-candle),
 			transparent 58%
 		),
 		url("./assets/pared.png");
@@ -23,20 +23,20 @@
 	top: 0;
 	z-index: 20;
 	display: grid;
-	grid-template-columns: auto minmax(0, 1fr) auto auto;
-	grid-template-areas: "logo nav meta wallet";
+	grid-template-columns: auto minmax(0, 1fr) auto auto auto;
+	grid-template-areas: "logo nav meta lang wallet";
 	align-items: center;
 	column-gap: var(--space-4);
 	row-gap: var(--space-3);
 	padding: var(--space-4) var(--space-6);
-	background-color: #3a261c;
+	background-color: var(--color-wood);
 	background-image:
 		linear-gradient(180deg, rgba(255, 226, 196, 0.16), transparent 46%),
 		url("./assets/madera.png");
 	background-size:
 		auto,
 		640px 128px;
-	border-bottom: 1px solid #6a4630;
+	border-bottom: 1px solid var(--color-wood-edge);
 	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
 }
 
@@ -60,6 +60,41 @@
 	display: flex;
 	gap: var(--space-1);
 	min-width: 0;
+}
+
+.lang {
+	grid-area: lang;
+	display: inline-flex;
+	align-items: center;
+	justify-self: end;
+	gap: 0.15rem;
+}
+
+.lang button {
+	min-height: 2.75rem;
+	padding: 0.35rem 0.4rem;
+	border: none;
+	background: transparent;
+	color: var(--color-text-muted);
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+}
+
+.lang button[aria-pressed="true"] {
+	color: var(--color-text);
+	box-shadow: inset 0 -2px 0 var(--color-olive-soft);
+}
+
+.lang button:hover:not(:disabled) {
+	background: transparent;
+	color: var(--color-text);
+}
+
+.langSeparador {
+	color: rgba(247, 241, 232, 0.55);
+	font-weight: 600;
+	line-height: 1;
 }
 
 .header :global(.connect-meta) {
@@ -134,10 +169,10 @@
 
 @media (max-width: 760px) {
 	.header {
-		grid-template-columns: minmax(max-content, 1fr) auto;
+		grid-template-columns: minmax(max-content, 1fr) auto auto;
 		grid-template-areas:
-			"logo wallet"
-			"nav meta";
+			"logo wallet wallet"
+			"nav meta lang";
 		padding: var(--space-4);
 	}
 
@@ -170,18 +205,19 @@
 	}
 }
 
-@media (max-width: 340px) {
+@media (max-width: 420px) {
 	.header {
-		grid-template-columns: 1fr;
+		grid-template-columns: minmax(0, 1fr) auto;
 		grid-template-areas:
-			"logo"
-			"wallet"
-			"nav"
-			"meta";
+			"logo logo"
+			"wallet lang"
+			"nav nav"
+			"meta meta";
 	}
 
 	.header :global(.wallet-slot),
-	.header :global(.connect-meta) {
+	.header :global(.connect-meta),
+	.lang {
 		justify-self: end;
 	}
 }

@@ -2,11 +2,13 @@ import { fundAccount } from "@stellar-scaffold/app-lib"
 import React, { useTransition } from "react"
 import { useNotification } from "../hooks/useNotification.ts"
 import { useWallet } from "../hooks/useWallet.ts"
+import { useLocale } from "../i18n"
 
 const FundAccountButton: React.FC = () => {
 	const { addNotification } = useNotification()
 	const [isPending, startTransition] = useTransition()
 	const { address, updateBalances } = useWallet()
+	const { t } = useLocale()
 
 	if (!address) return null
 
@@ -23,9 +25,9 @@ const FundAccountButton: React.FC = () => {
 			className="btn-quiet"
 			disabled={isPending}
 			onClick={handleFundAccount}
-			title="Pide XLM de prueba a Friendbot"
+			title={t.fundTitle}
 		>
-			{isPending ? "Fondeando…" : "Fondear"}
+			{isPending ? t.funding : t.fund}
 		</button>
 	)
 }

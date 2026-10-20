@@ -84,6 +84,13 @@ publica con GitHub Actions. En el repositorio, Pages tiene que usar el origen
 
 ![Libro de visitas leyendo las firmas de testnet](docs/captura-cripto-cantina.png)
 
+La portada se abre con **Abrir el libro**. Las firmas quedan en las páginas y la
+nota nueva se escribe en la última.
+
+En la barra superior, **ES | EN** cambia el idioma de la interfaz. Español es el
+idioma por defecto; la elección se guarda en el navegador. Los mensajes ya
+firmados en la cadena no se traducen.
+
 Conecta con Freighter u otra wallet del Stellar Wallets Kit, en la red testnet.
 Si la cuenta está vacía, **Fondear** le pide XLM a Friendbot. Cada dirección
 puede firmar una sola vez: la segunda vez el contrato responde `YaFirmo`.

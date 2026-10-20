@@ -1,6 +1,14 @@
 :root {
 	--color-bg: #1a110d;
-	--color-wood: #3c271b;
+	--color-candle: rgba(214, 146, 78, 0.3);
+	--color-wood: #3a261c;
+	--color-wood-edge: #6a4630;
+	--color-cover: #3c1e16;
+	--color-cover-light: #6e4030;
+	--color-cover-deep: #1a0c09;
+	--color-foil: #f0d48a;
+	--color-foil-deep: #a07c32;
+	--color-foil-line: rgba(240, 212, 138, 0.55);
 	--color-surface: #2a1c15;
 	--color-text: #f7f1e8;
 	--color-text-muted: #d9cbbd;
