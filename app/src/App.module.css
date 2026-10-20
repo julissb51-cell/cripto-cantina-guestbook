@@ -21,11 +21,9 @@
 	column-gap: var(--space-4);
 	row-gap: var(--space-3);
 	padding: 0.85rem var(--space-6);
-	background: rgba(22, 14, 10, 0.62);
+	background: #3c2820;
 	background-image: none;
-	border-bottom: 1px solid rgba(243, 234, 216, 0.08);
-	backdrop-filter: blur(16px);
-	-webkit-backdrop-filter: blur(16px);
+	border-bottom: 1px solid rgba(243, 234, 216, 0.12);
 }
 
 .logo {
@@ -191,7 +189,7 @@
 }
 
 .footer {
-	background: #1c140f;
+	background: #3c2820;
 	border-top: 1px solid rgba(243, 234, 216, 0.08);
 	padding: var(--space-5) var(--space-6);
 	display: flex;

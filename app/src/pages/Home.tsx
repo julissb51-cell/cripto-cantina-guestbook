@@ -1,4 +1,4 @@
-import { useRef, type CSSProperties } from "react"
+import { useRef } from "react"
 import { Link } from "react-router-dom"
 import {
 	LibroDeVisitas,
@@ -11,7 +11,6 @@ import styles from "./Home.module.css"
 
 const CONTRACT_ID = "CC3KM7M4JW6ZXSMTF4X77JQP57LIIHQBBBCGPUX7ZAGGR3IWPJA7JCGB"
 const EXPERT_URL = `https://stellar.expert/explorer/testnet/contract/${CONTRACT_ID}`
-const HERO = `${import.meta.env.BASE_URL}assets/cantina-hero.webp`
 
 const scrollToId = (id: string) => {
 	const nodo = document.getElementById(id)
@@ -51,10 +50,7 @@ const Home = () => {
 
 	return (
 		<div className={styles.Home}>
-			<section
-				className={styles.hero}
-				style={{ "--foto": `url("${HERO}")` } as CSSProperties}
-			>
+			<section className={styles.hero}>
 				<div className={styles.heroInner}>
 					<p className={styles.eyebrow}>{t.kicker}</p>
 					<h1>
