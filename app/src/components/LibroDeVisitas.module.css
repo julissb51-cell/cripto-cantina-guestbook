@@ -180,7 +180,7 @@
 }
 
 .libroAbierto:focus-visible {
-	outline: 2px solid #f3d2b0;
+	outline: 2px solid var(--color-foil);
 	outline-offset: 4px;
 }
 
@@ -274,7 +274,7 @@
 	font-size: 1.2rem;
 	line-height: 1.2;
 	color: var(--color-olive-ink);
-	border-bottom: 1px solid rgba(49, 68, 30, 0.4);
+	border-bottom: 1px solid rgba(74, 26, 34, 0.45);
 	padding-bottom: 0.12rem;
 }
 
@@ -345,8 +345,8 @@
 		to bottom,
 		transparent 0,
 		transparent calc(2rem - 1px),
-		rgba(94, 73, 58, 0.35) calc(2rem - 1px),
-		rgba(94, 73, 58, 0.35) 2rem
+		rgba(74, 26, 34, 0.28) calc(2rem - 1px),
+		rgba(74, 26, 34, 0.28) 2rem
 	);
 	background-attachment: local;
 	background-position: 0 -0.625rem;
@@ -359,7 +359,7 @@
 }
 
 .firma textarea::placeholder {
-	color: #6a5142;
+	color: var(--color-ink-soft);
 	font-style: italic;
 }
 
@@ -388,7 +388,7 @@
 	flex: 1;
 	height: 0.4rem;
 	border-radius: 999px;
-	background: rgba(43, 28, 20, 0.12);
+	background: rgba(74, 26, 34, 0.14);
 	overflow: hidden;
 }
 
@@ -433,9 +433,9 @@
 }
 
 .ya {
-	background: #e7efd8;
-	color: #2c3b1c;
-	border: 1px solid #b7c49a;
+	background: #e7d5c0;
+	color: var(--color-success);
+	border: 1px solid #b08968;
 }
 
 .firmando {
@@ -445,15 +445,15 @@
 }
 
 .error {
-	background: #f8e2da;
+	background: #f4ddd6;
 	color: var(--color-error);
-	border: 1px solid #e3b2a6;
+	border: 1px solid #c98484;
 }
 
 .ok {
-	background: #e3edd6;
+	background: #e7d5c0;
 	color: var(--color-success);
-	border: 1px solid #b7c79a;
+	border: 1px solid #b08968;
 }
 
 button.principal {
@@ -461,7 +461,7 @@ button.principal {
 	margin-top: var(--space-4);
 	min-height: 3rem;
 	padding: 0.75rem 1rem;
-	border: 1px solid transparent;
+	border: 1px solid rgba(239, 227, 201, 0.45);
 	border-radius: var(--radius);
 	background: var(--color-accent);
 	color: var(--color-accent-text);
@@ -474,15 +474,15 @@ button.principal:hover:not(:disabled) {
 }
 
 button.principal:disabled {
-	background: #6e3a32;
-	color: #f3d2cb;
+	background: #5c242c;
+	color: var(--color-accent-text);
 	opacity: 1;
 }
 
 button.secundario {
 	align-self: flex-start;
 	margin-top: var(--space-4);
-	border: 1px solid rgba(43, 28, 20, 0.35);
+	border: 1px solid rgba(74, 26, 34, 0.4);
 	background: transparent;
 	color: var(--color-ink);
 }

@@ -16,9 +16,9 @@
 	border-radius: 10px;
 	font-size: 0.95rem;
 	line-height: 1.4;
-	border: 1px solid #e0d0ba;
-	background: #f6efe3;
-	color: #2b1c14;
+	border: 1px solid #c4ae8e;
+	background: #efe3c9;
+	color: #4a1a22;
 	box-shadow: 0 12px 28px rgba(8, 4, 2, 0.28);
 	transition:
 		transform 0.3s ease,
@@ -36,23 +36,23 @@
 }
 
 .notification-success {
-	border-color: #8ea36a;
-	background: #e3edd6;
-	color: #24381c;
+	border-color: #b08968;
+	background: #e7d5c0;
+	color: #3f2416;
 }
 
 .notification-error {
-	border-color: #e3b2a6;
-	background: #f8e2da;
-	color: #6e241c;
+	border-color: #c98484;
+	background: #f4ddd6;
+	color: #4a1a22;
 }
 
 .notification-warning,
 .notification-primary,
 .notification-secondary {
-	border-color: #e2c99a;
-	background: #f8ecd4;
-	color: #5c3d10;
+	border-color: #c4ae8e;
+	background: #efe3c9;
+	color: #4a1a22;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,6 @@
 import { NavLink, Outlet, Route, Routes } from "react-router-dom"
 import styles from "./App.module.css"
+import { Barril } from "./components/Barril"
 import ConnectAccount from "./components/ConnectAccount"
 import { useLocale, type Locale } from "./i18n"
 import Debug from "./pages/Debug"
@@ -26,6 +27,12 @@ const AppLayout = () => {
 		<div className={styles.AppLayout}>
 			<header className={styles.header}>
 				<NavLink to="/" className={styles.logo}>
+					<span className={styles.marca} aria-hidden="true">
+						<Barril className={styles.ghostR} />
+						<Barril className={styles.ghostC} />
+						<Barril className={styles.base} />
+						<Barril className={styles.slice} />
+					</span>
 					Cripto Cantina
 				</NavLink>
 				<nav className={styles.headerNav}>
