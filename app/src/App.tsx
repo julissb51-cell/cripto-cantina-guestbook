@@ -1,4 +1,5 @@
-import { NavLink, Outlet, Route, Routes } from "react-router-dom"
+import type { MouseEvent } from "react"
+import { Link, Outlet, Route, Routes, useLocation } from "react-router-dom"
 import styles from "./App.module.css"
 import { Barril } from "./components/Barril"
 import ConnectAccount from "./components/ConnectAccount"
@@ -20,13 +21,24 @@ function App() {
 	)
 }
 
+const ancla =
+	(id: string, pathname: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+		if (pathname !== "/") return
+		const nodo = document.getElementById(id)
+		if (!nodo) return
+		event.preventDefault()
+		const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+		nodo.scrollIntoView({ behavior: reduce ? "auto" : "smooth" })
+	}
+
 const AppLayout = () => {
 	const { locale, setLocale, t } = useLocale()
+	const { pathname } = useLocation()
 
 	return (
 		<div className={styles.AppLayout}>
 			<header className={styles.header}>
-				<NavLink to="/" className={styles.logo}>
+				<Link to="/" className={styles.logo}>
 					<span className={styles.marca} aria-hidden="true">
 						<Barril className={styles.ghostR} />
 						<Barril className={styles.ghostC} />
@@ -34,17 +46,17 @@ const AppLayout = () => {
 						<Barril className={styles.slice} />
 					</span>
 					Cripto Cantina
-				</NavLink>
+				</Link>
 				<nav className={styles.headerNav}>
-					<NavLink
-						to="/debug"
-						className={({ isActive }) => (isActive ? styles.active : "")}
-					>
-						{t.explorer}
-					</NavLink>
-					<a href={EXPERT_URL} target="_blank" rel="noreferrer">
+					<Link to="/#la-barra" onClick={ancla("la-barra", pathname)}>
+						{t.navBarra}
+					</Link>
+					<Link to="/#el-libro" onClick={ancla("el-libro", pathname)}>
+						{t.navLibro}
+					</Link>
+					<Link to="/#contrato" onClick={ancla("contrato", pathname)}>
 						{t.contract}
-					</a>
+					</Link>
 				</nav>
 				<div className={styles.lang} role="group" aria-label={t.language}>
 					<LangButton code="es" current={locale} onSelect={setLocale} />
@@ -63,6 +75,7 @@ const AppLayout = () => {
 			<footer className={styles.footer}>
 				<p>{t.footer}</p>
 				<nav className={styles.footerNav}>
+					<Link to="/debug">{t.explorer}</Link>
 					<a href={EXPERT_URL} target="_blank" rel="noreferrer">
 						stellar.expert
 					</a>

@@ -1,7 +1,15 @@
 import { shortAddress } from "@stellar-scaffold/app-lib"
 import { libroDeVisitas } from "@stellar-scaffold/app-lib/clients"
 import { useQuery } from "@tanstack/react-query"
-import { useEffect, useRef, useState, useSyncExternalStore } from "react"
+import {
+	forwardRef,
+	useCallback,
+	useEffect,
+	useImperativeHandle,
+	useRef,
+	useState,
+	useSyncExternalStore,
+} from "react"
 import { useWallet } from "../hooks/useWallet"
 import { useLocale, type Copy, type Locale } from "../i18n"
 import styles from "./LibroDeVisitas.module.css"
@@ -24,6 +32,12 @@ type Hoja =
 	| { tipo: "vacia"; vacio: boolean }
 	| { tipo: "cargando" }
 	| { tipo: "error" }
+
+export type LibroDestino = "firmas" | "firma"
+
+export type LibroControl = {
+	abrirEn: (destino: LibroDestino) => void
+}
 
 const bytesDe = (texto: string) => new TextEncoder().encode(texto).length
 
@@ -121,30 +135,8 @@ const Emblema = () => (
 	</svg>
 )
 
-const Titulo = ({ t }: { t: Copy }) => (
-	<h1 id="titulo-libro">
-		{t.coverTitle} <span className={styles.subtitulo}>{t.coverSubtitle}</span>
-	</h1>
-)
-
-export const LibroDeVisitas = () => {
-	const { address, signTransaction } = useWallet()
-	const { locale, t } = useLocale()
-	const estrecho = useEstrecho()
-	const [abierto, setAbierto] = useState(false)
-	const [cursor, setCursor] = useState(0)
-	const [giro, setGiro] = useState<"" | "adelante" | "atras">("")
-	const [borrador, setBorrador] = useState("")
-	const [enviando, setEnviando] = useState(false)
-	const [aviso, setAviso] = useState<string>()
-	const [exito, setExito] = useState<string>()
-	const libroRef = useRef<HTMLDivElement>(null)
-	const abrirRef = useRef<HTMLButtonElement>(null)
-	const colocado = useRef(false)
-	const enElFinal = useRef(true)
-	const giroTimer = useRef<number>(0)
-
-	const libro = useQuery({
+export const useEntradas = () =>
+	useQuery({
 		queryKey: ["libro-de-visitas", CONTRACT_ID],
 		queryFn: async () => {
 			const tx = await libroDeVisitas.listar()
@@ -153,257 +145,288 @@ export const LibroDeVisitas = () => {
 		refetchInterval: 15_000,
 	})
 
-	const hojas = hojasDe(libro.data, libro.isError)
-	const cursorSeguro =
-		hojas.length === 0 ? 0 : Math.min(cursor, hojas.length - 1)
-	const inicio = estrecho ? cursorSeguro : cursorSeguro - (cursorSeguro % 2)
-	const visibles = estrecho
-		? hojas.slice(inicio, inicio + 1)
-		: hojas.slice(inicio, inicio + 2)
-	const desde = inicio + 1
-	const hasta = estrecho ? desde : Math.min(desde + 1, hojas.length)
-	const alInicio = inicio === 0
-	const alFinal = inicio + (estrecho ? 1 : 2) >= hojas.length
+export const LibroDeVisitas = forwardRef<LibroControl>(
+	function LibroDeVisitas(_props, ref) {
+		const { address, signTransaction } = useWallet()
+		const { locale, t } = useLocale()
+		const estrecho = useEstrecho()
+		const [abierto, setAbierto] = useState(false)
+		const [cursor, setCursor] = useState(0)
+		const [giro, setGiro] = useState<"" | "adelante" | "atras">("")
+		const [borrador, setBorrador] = useState("")
+		const [enviando, setEnviando] = useState(false)
+		const [aviso, setAviso] = useState<string>()
+		const [exito, setExito] = useState<string>()
+		const libroRef = useRef<HTMLDivElement>(null)
+		const abrirRef = useRef<HTMLButtonElement>(null)
+		const colocado = useRef(false)
+		const enElFinal = useRef(true)
+		const giroTimer = useRef<number>(0)
 
-	const usados = bytesDe(borrador)
-	const cabe = usados > 0 && usados <= MAX_BYTES
-	const yaFirmo = Boolean(
-		address && libro.data?.some((entrada) => entrada.autor === address),
-	)
-	const medidaEstado =
-		usados > MAX_BYTES
-			? styles.medidaMal
-			: usados > MAX_BYTES * 0.8
-				? styles.medidaAviso
-				: undefined
-	const progreso = Math.min(100, (usados / MAX_BYTES) * 100)
+		const libro = useEntradas()
 
-	useEffect(() => {
-		if (!abierto || !libro.data) return
-		const firma = indiceDeFirma(libro.data.length)
-		if (!colocado.current || enElFinal.current) {
-			colocado.current = true
-			setCursor((actual) => (actual === firma ? actual : firma))
-		}
-	}, [abierto, libro.data])
+		const hojas = hojasDe(libro.data, libro.isError)
+		const cursorSeguro =
+			hojas.length === 0 ? 0 : Math.min(cursor, hojas.length - 1)
+		const inicio = estrecho ? cursorSeguro : cursorSeguro - (cursorSeguro % 2)
+		const visibles = estrecho
+			? hojas.slice(inicio, inicio + 1)
+			: hojas.slice(inicio, inicio + 2)
+		const desde = inicio + 1
+		const hasta = estrecho ? desde : Math.min(desde + 1, hojas.length)
+		const alInicio = inicio === 0
+		const alFinal = inicio + (estrecho ? 1 : 2) >= hojas.length
 
-	useEffect(() => {
-		if (abierto) libroRef.current?.focus()
-	}, [abierto])
-
-	useEffect(() => () => window.clearTimeout(giroTimer.current), [])
-
-	const abrir = () => {
-		enElFinal.current = true
-		setGiro("")
-		if (libro.data) {
-			colocado.current = true
-			setCursor(indiceDeFirma(libro.data.length))
-		} else {
-			colocado.current = false
-			setCursor(1)
-		}
-		setAbierto(true)
-	}
-
-	const cerrar = () => {
-		setAbierto(false)
-		colocado.current = false
-		enElFinal.current = true
-		setGiro("")
-		window.setTimeout(() => abrirRef.current?.focus(), 0)
-	}
-
-	const ir = (direccion: 1 | -1) => {
-		const paso = estrecho ? 1 : 2
-		const base = estrecho ? cursorSeguro : cursorSeguro - (cursorSeguro % 2)
-		const destino = Math.max(
-			0,
-			Math.min(hojas.length - 1, base + direccion * paso),
+		const usados = bytesDe(borrador)
+		const cabe = usados > 0 && usados <= MAX_BYTES
+		const yaFirmo = Boolean(
+			address && libro.data?.some((entrada) => entrada.autor === address),
 		)
-		const ajustado = estrecho ? destino : destino - (destino % 2)
-		if (ajustado === inicio) return
-		enElFinal.current = ajustado + (estrecho ? 1 : 2) >= hojas.length
-		setGiro(direccion > 0 ? "adelante" : "atras")
-		window.clearTimeout(giroTimer.current)
-		giroTimer.current = window.setTimeout(() => setGiro(""), 420)
-		setCursor(ajustado)
-	}
+		const medidaEstado =
+			usados > MAX_BYTES
+				? styles.medidaMal
+				: usados > MAX_BYTES * 0.8
+					? styles.medidaAviso
+					: undefined
+		const progreso = Math.min(100, (usados / MAX_BYTES) * 100)
 
-	const firmar = async () => {
-		setAviso(undefined)
-		setExito(undefined)
-		if (!address) {
-			setAviso(t.connectFirst)
-			return
-		}
-		if (yaFirmo) {
-			setAviso(t.errores.YaFirmo)
-			return
-		}
-		if (!cabe) {
-			setAviso(
-				usados === 0 ? t.errores.MensajeVacio : t.errores.MensajeMuyLargo,
-			)
-			return
+		useEffect(() => {
+			if (!abierto || !libro.data) return
+			const firma = indiceDeFirma(libro.data.length)
+			if (!colocado.current) {
+				colocado.current = true
+				if (enElFinal.current) setCursor(firma)
+				return
+			}
+			if (enElFinal.current) {
+				setCursor((actual) => (actual === firma ? actual : firma))
+			}
+		}, [abierto, libro.data])
+
+		useEffect(() => {
+			if (abierto) libroRef.current?.focus()
+		}, [abierto])
+
+		useEffect(() => () => window.clearTimeout(giroTimer.current), [])
+
+		const abrirEn = useCallback(
+			(destino: LibroDestino) => {
+				const alFinal = destino === "firma"
+				enElFinal.current = alFinal
+				setGiro("")
+				if (libro.data) {
+					colocado.current = true
+					setCursor(alFinal ? indiceDeFirma(libro.data.length) : 0)
+				} else {
+					colocado.current = false
+					setCursor(alFinal ? 1 : 0)
+				}
+				setAbierto(true)
+			},
+			[libro.data],
+		)
+
+		useImperativeHandle(ref, () => ({ abrirEn }), [abrirEn])
+
+		const cerrar = () => {
+			setAbierto(false)
+			colocado.current = false
+			enElFinal.current = true
+			setGiro("")
+			window.setTimeout(() => abrirRef.current?.focus(), 0)
 		}
 
-		setEnviando(true)
-		try {
-			const tx = await libroDeVisitas.firmar(
-				{ autor: address, mensaje: borrador },
-				{ publicKey: address },
+		const ir = (direccion: 1 | -1) => {
+			const paso = estrecho ? 1 : 2
+			const base = estrecho ? cursorSeguro : cursorSeguro - (cursorSeguro % 2)
+			const destino = Math.max(
+				0,
+				Math.min(hojas.length - 1, base + direccion * paso),
 			)
-			if (tx.result.isErr()) {
-				setAviso(textoDeError(tx.result.unwrapErr(), t))
+			const ajustado = estrecho ? destino : destino - (destino % 2)
+			if (ajustado === inicio) return
+			enElFinal.current = ajustado + (estrecho ? 1 : 2) >= hojas.length
+			setGiro(direccion > 0 ? "adelante" : "atras")
+			window.clearTimeout(giroTimer.current)
+			giroTimer.current = window.setTimeout(() => setGiro(""), 420)
+			setCursor(ajustado)
+		}
+
+		const firmar = async () => {
+			setAviso(undefined)
+			setExito(undefined)
+			if (!address) {
+				setAviso(t.connectFirst)
+				return
+			}
+			if (yaFirmo) {
+				setAviso(t.errores.YaFirmo)
+				return
+			}
+			if (!cabe) {
+				setAviso(
+					usados === 0 ? t.errores.MensajeVacio : t.errores.MensajeMuyLargo,
+				)
 				return
 			}
 
-			const enviada = await tx.signAndSend({ signTransaction })
-			if (enviada.result.isErr()) {
-				setAviso(textoDeError(enviada.result.unwrapErr(), t))
-				return
-			}
+			setEnviando(true)
+			try {
+				const tx = await libroDeVisitas.firmar(
+					{ autor: address, mensaje: borrador },
+					{ publicKey: address },
+				)
+				if (tx.result.isErr()) {
+					setAviso(textoDeError(tx.result.unwrapErr(), t))
+					return
+				}
 
-			setBorrador("")
-			setExito(t.signed)
-			const actualizado = await libro.refetch()
-			const total = actualizado.data?.length
-			if (typeof total === "number") {
-				enElFinal.current = true
-				setGiro("adelante")
-				setCursor(indiceDeFirma(total))
+				const enviada = await tx.signAndSend({ signTransaction })
+				if (enviada.result.isErr()) {
+					setAviso(textoDeError(enviada.result.unwrapErr(), t))
+					return
+				}
+
+				setBorrador("")
+				setExito(t.signed)
+				const actualizado = await libro.refetch()
+				const total = actualizado.data?.length
+				if (typeof total === "number") {
+					enElFinal.current = true
+					setGiro("adelante")
+					setCursor(indiceDeFirma(total))
+				}
+			} catch (error) {
+				setAviso(textoDeError(error, t))
+			} finally {
+				setEnviando(false)
 			}
-		} catch (error) {
-			setAviso(textoDeError(error, t))
-		} finally {
-			setEnviando(false)
 		}
-	}
 
-	const rango =
-		desde === hasta
-			? t.paginaDe(desde, hojas.length)
-			: t.paginasDe(desde, hasta, hojas.length)
+		const rango =
+			desde === hasta
+				? t.paginaDe(desde, hojas.length)
+				: t.paginasDe(desde, hasta, hojas.length)
 
-	return (
-		<div className={styles.escena}>
-			{!abierto ? (
-				<div className={styles.cerrado}>
-					<div
-						className={styles.cubierta}
-						role="button"
-						tabIndex={0}
-						onClick={abrir}
-						onKeyDown={(event) => {
-							if (event.key === "Enter" || event.key === " ") {
-								event.preventDefault()
-								abrir()
-							}
-						}}
-					>
-						<Emblema />
-						<p className={styles.cubiertaKicker}>{t.coverKicker}</p>
-						<Titulo t={t} />
-						<span className={styles.filete} aria-hidden="true">
-							<i />
-						</span>
-					</div>
-					<button
-						ref={abrirRef}
-						type="button"
-						className={styles.principal}
-						onClick={abrir}
-					>
-						{t.openBook}
-					</button>
-					<p className={styles.antes}>{t.closedLede}</p>
-				</div>
-			) : (
-				<>
-					<div className={styles.tituloAbierto}>
-						<Titulo t={t} />
-					</div>
-					<div
-						ref={libroRef}
-						className={styles.libroAbierto}
-						role="region"
-						tabIndex={-1}
-						aria-labelledby="titulo-libro"
-					>
+		return (
+			<div className={styles.escena}>
+				{!abierto ? (
+					<div className={styles.cerrado}>
 						<div
-							className={`${styles.pliego} ${
-								giro === "adelante"
-									? styles.giroAdelante
-									: giro === "atras"
-										? styles.giroAtras
-										: ""
-							}`}
-							key={inicio}
+							className={styles.cubierta}
+							role="button"
+							tabIndex={0}
+							onClick={() => abrirEn("firma")}
+							onKeyDown={(event) => {
+								if (event.key === "Enter" || event.key === " ") {
+									event.preventDefault()
+									abrirEn("firma")
+								}
+							}}
 						>
-							{visibles.map((hoja, desplazamiento) => (
-								<Pagina
-									key={`${inicio + desplazamiento}-${hoja.tipo}`}
-									hoja={hoja}
-									numero={inicio + desplazamiento + 1}
-									lado={desplazamiento === 0 ? "izquierda" : "derecha"}
-									t={t}
-									locale={locale}
-									borrador={borrador}
-									setBorrador={setBorrador}
-									setAviso={setAviso}
-									setExito={setExito}
-									usados={usados}
-									progreso={progreso}
-									medidaEstado={medidaEstado}
-									yaFirmo={yaFirmo}
-									enviando={enviando}
-									aviso={aviso}
-									exito={exito}
-									address={address}
-									cabe={cabe}
-									onFirmar={() => void firmar()}
-									onReintentar={() => void libro.refetch()}
-								/>
-							))}
+							<Emblema />
+							<p className={styles.cubiertaKicker}>{t.coverKicker}</p>
+							<p className={styles.cubiertaTitulo}>
+								{t.coverTitle}{" "}
+								<span className={styles.subtitulo}>{t.coverSubtitle}</span>
+							</p>
+							<span className={styles.filete} aria-hidden="true">
+								<i />
+							</span>
 						</div>
+						<button
+							ref={abrirRef}
+							type="button"
+							className={styles.principal}
+							onClick={() => abrirEn("firma")}
+						>
+							{t.openBook}
+						</button>
+						<p className={styles.antes}>{t.closedLede}</p>
 					</div>
-					<nav className={styles.paginacion} aria-label={t.pagination}>
-						<button
-							type="button"
-							className={styles.flecha}
-							aria-label={t.prev}
-							disabled={alInicio}
-							onClick={() => ir(-1)}
+				) : (
+					<>
+						<div
+							ref={libroRef}
+							className={styles.libroAbierto}
+							role="region"
+							tabIndex={-1}
+							aria-label={t.bookLabel}
 						>
-							<span aria-hidden="true">←</span>
-						</button>
-						<p className={styles.rango} aria-live="polite">
-							{rango}
-							{libro.data ? (
-								<span className={styles.cuenta}>
-									{t.cuenta(libro.data.length)}
-								</span>
-							) : null}
-						</p>
-						<button
-							type="button"
-							className={styles.flecha}
-							aria-label={t.next}
-							disabled={alFinal}
-							onClick={() => ir(1)}
-						>
-							<span aria-hidden="true">→</span>
-						</button>
-						<button type="button" className={styles.cerrar} onClick={cerrar}>
-							{t.closeBook}
-						</button>
-					</nav>
-				</>
-			)}
-		</div>
-	)
-}
+							<div
+								className={`${styles.pliego} ${
+									giro === "adelante"
+										? styles.giroAdelante
+										: giro === "atras"
+											? styles.giroAtras
+											: ""
+								}`}
+								key={inicio}
+							>
+								{visibles.map((hoja, desplazamiento) => (
+									<Pagina
+										key={`${inicio + desplazamiento}-${hoja.tipo}`}
+										hoja={hoja}
+										numero={inicio + desplazamiento + 1}
+										lado={desplazamiento === 0 ? "izquierda" : "derecha"}
+										t={t}
+										locale={locale}
+										borrador={borrador}
+										setBorrador={setBorrador}
+										setAviso={setAviso}
+										setExito={setExito}
+										usados={usados}
+										progreso={progreso}
+										medidaEstado={medidaEstado}
+										yaFirmo={yaFirmo}
+										enviando={enviando}
+										aviso={aviso}
+										exito={exito}
+										address={address}
+										cabe={cabe}
+										onFirmar={() => void firmar()}
+										onReintentar={() => void libro.refetch()}
+									/>
+								))}
+							</div>
+						</div>
+						<nav className={styles.paginacion} aria-label={t.pagination}>
+							<button
+								type="button"
+								className={styles.flecha}
+								aria-label={t.prev}
+								disabled={alInicio}
+								onClick={() => ir(-1)}
+							>
+								<span aria-hidden="true">←</span>
+							</button>
+							<p className={styles.rango} aria-live="polite">
+								{rango}
+								{libro.data ? (
+									<span className={styles.cuenta}>
+										{t.cuenta(libro.data.length)}
+									</span>
+								) : null}
+							</p>
+							<button
+								type="button"
+								className={styles.flecha}
+								aria-label={t.next}
+								disabled={alFinal}
+								onClick={() => ir(1)}
+							>
+								<span aria-hidden="true">→</span>
+							</button>
+							<button type="button" className={styles.cerrar} onClick={cerrar}>
+								{t.closeBook}
+							</button>
+						</nav>
+					</>
+				)}
+			</div>
+		)
+	},
+)
 
 const Pagina = ({
 	hoja,
@@ -524,12 +547,13 @@ const Pagina = ({
 			className={`${styles.hoja} ${styles[lado]} ${styles.firma}`}
 			aria-labelledby="deja-tu-firma"
 		>
+			<span className={styles.sello}>{t.sello}</span>
 			<h2 id="deja-tu-firma">{t.signTitle}</h2>
 			<p className={styles.lede}>{t.signLede}</p>
 			<label htmlFor="mensaje">{t.noteLabel}</label>
 			<textarea
 				id="mensaje"
-				rows={4}
+				rows={2}
 				value={borrador}
 				placeholder={t.notePlaceholder}
 				aria-describedby="medida-bytes"

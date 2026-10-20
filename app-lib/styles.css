@@ -1,41 +1,45 @@
 :root {
-	/* Reserva Añeja: fondo vino, marco crema, barras en rojo #9a3140. */
-	--color-bg: #4a1a22;
-	--color-bg-deep: #3a1219;
-	--color-candle: rgba(239, 227, 201, 0.08);
-	--color-bar: #9a3140;
-	--color-bar-edge: #7e2634;
+	/* Estética de la referencia: espresso, papel crema, vino y oro. */
+	--color-bg: #281b14;
+	--color-bg-deep: #1c140f;
+	--color-bg-raise: #3a2a20;
+	--color-candle: rgba(243, 234, 216, 0.08);
+	--color-bar: rgba(22, 14, 10, 0.72);
+	--color-bar-edge: rgba(243, 234, 216, 0.1);
 	--color-wood: #7b4b2a;
 	--color-wood-edge: #5c3820;
-	--color-cover: #7b4b2a;
-	--color-cover-light: #94643c;
-	--color-cover-deep: #4e3018;
-	--color-foil: #f0d48a;
-	--color-foil-deep: #a07c32;
-	--color-foil-line: rgba(240, 212, 138, 0.62);
-	--color-surface: #6a4024;
-	--color-on-bar: #efe3c9;
-	--color-on-bar-muted: #e4d2b0;
-	--color-text: #efe3c9;
-	--color-text-muted: #e4d2b0;
-	--color-border: rgba(74, 26, 34, 0.28);
-	--color-accent: #4a1a22;
-	--color-accent-hover: #3a1219;
-	--color-accent-text: #efe3c9;
-	--color-olive: #7b4b2a;
-	--color-olive-soft: #e7c98a;
-	--color-olive-ink: #5c2a22;
-	--color-paper: #fffaf3;
-	--color-ink: #4a1a22;
-	--color-ink-soft: #6b3a28;
+	--color-cafe: #7b4b2a;
+	--color-cover: #3a241c;
+	--color-cover-light: #5c3b2c;
+	--color-cover-deep: #241610;
+	--color-foil: #c9a24e;
+	--color-foil-deep: #8c6a2e;
+	--color-foil-line: rgba(201, 162, 78, 0.55);
+	--color-gold: #c9a24e;
+	--color-wine: #7e3439;
+	--color-surface: #3a2a20;
+	--color-on-bar: #f3ead8;
+	--color-on-bar-muted: #cdbba6;
+	--color-text: #f3ead8;
+	--color-text-muted: #cdbba6;
+	--color-border: rgba(243, 234, 216, 0.16);
+	--color-accent: #7e3439;
+	--color-accent-hover: #692c30;
+	--color-accent-text: #f3ead8;
+	--color-olive: #5e6b3a;
+	--color-olive-soft: #c9a24e;
+	--color-olive-ink: #5a623a;
+	--color-paper: #e8dfcc;
+	--color-ink: #2a1d16;
+	--color-ink-soft: #5c4e40;
 	--color-success: #3f2416;
-	--color-error: #4a1a22;
-	--color-warning: #6b3a28;
-	--radius: 8px;
-	--shadow: 0 18px 40px rgba(74, 26, 34, 0.16);
+	--color-error: #7e3439;
+	--color-warning: #8a5a28;
+	--radius: 14px;
+	--shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
 	--font-display:
-		"Lora", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
-	--font-body: "Source Sans 3", "Segoe UI", sans-serif;
+		"Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+	--font-body: "Manrope", "Segoe UI", sans-serif;
 	--font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 	--space-1: 0.25rem;
 	--space-2: 0.5rem;
@@ -120,15 +124,15 @@ button {
 	line-height: 1.2;
 	min-height: 2.75rem;
 	padding: 0.55rem 1rem;
-	border-radius: var(--radius);
-	border: 1px solid rgba(239, 227, 201, 0.5);
+	border-radius: 12px;
+	border: 1px solid rgba(243, 234, 216, 0.38);
 	background: transparent;
 	color: var(--color-text);
 	cursor: pointer;
 }
 
 button:hover:not(:disabled) {
-	background: rgba(239, 227, 201, 0.1);
+	background: rgba(243, 234, 216, 0.08);
 }
 
 button:disabled {
@@ -137,25 +141,29 @@ button:disabled {
 }
 
 .btn-header {
-	border-color: rgba(239, 227, 201, 0.78);
-	background: rgba(239, 227, 201, 0.14);
-	color: var(--color-on-bar);
+	border: 1.5px solid var(--color-gold);
+	border-radius: 999px;
+	background: transparent;
+	color: var(--color-gold);
 	white-space: nowrap;
+	padding-inline: 1.15rem;
 }
 
 .btn-header:hover:not(:disabled) {
-	background: rgba(247, 241, 232, 0.14);
-	border-color: rgba(247, 241, 232, 0.72);
+	background: rgba(201, 162, 78, 0.14);
+	border-color: var(--color-gold);
+	color: #e2c27a;
 }
 
 .btn-quiet {
-	border-color: rgba(239, 227, 201, 0.55);
+	border-color: rgba(243, 234, 216, 0.4);
 	color: var(--color-on-bar);
 	background: transparent;
+	border-radius: 999px;
 }
 
 .btn-quiet:hover:not(:disabled) {
-	background: rgba(239, 227, 201, 0.12);
+	background: rgba(243, 234, 216, 0.08);
 	border-color: var(--color-text);
 }
 
@@ -197,15 +205,16 @@ dialog::backdrop {
 }
 
 .network-pill {
-	background: var(--color-paper);
-	color: var(--color-ink);
-	border: 1px solid var(--color-wood-edge);
-	padding: 0 0.75rem;
-	min-height: 2rem;
+	background: var(--color-olive);
+	color: var(--color-text);
+	border: none;
+	padding: 0 0.85rem;
+	min-height: 2.05rem;
 	border-radius: 999px;
-	font-size: 0.75rem;
+	font-size: 0.72rem;
 	font-weight: 700;
-	letter-spacing: 0.06em;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
 	display: inline-flex;
 	align-items: center;
 	gap: 0.4rem;
@@ -235,7 +244,7 @@ dialog::backdrop {
 }
 
 .network-dot--ok {
-	background: var(--color-ink);
+	background: #e4efc4;
 }
 
 .network-dot--mismatch {
