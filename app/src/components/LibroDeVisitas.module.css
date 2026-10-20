@@ -11,16 +11,7 @@
 	border-radius: 3px 16px 16px 3px;
 	padding: var(--space-5) var(--space-5) var(--space-5)
 		calc(var(--space-5) + 0.35rem);
-	box-shadow:
-		inset 14px 0 18px -16px rgba(48, 24, 10, 0.55),
-		inset 0 1px 0 rgba(255, 252, 247, 0.75),
-		0 16px 36px rgba(8, 4, 2, 0.32);
-	background-image:
-		radial-gradient(rgba(90, 58, 32, 0.045) 0.7px, transparent 0.7px),
-		linear-gradient(180deg, rgba(255, 252, 247, 0.55), transparent 2.75rem);
-	background-size:
-		6px 6px,
-		100% 100%;
+	box-shadow: 0 16px 36px rgba(8, 4, 2, 0.32);
 }
 
 .pagina::before {
