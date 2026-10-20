@@ -7,6 +7,9 @@ import App from "./App.tsx"
 import { NotificationProvider } from "./providers/NotificationProvider.tsx"
 import { WalletProvider } from "./providers/WalletProvider.tsx"
 
+// Vite sets BASE_URL from `base` (`/` in dev, `/cripto-cantina-guestbook/` on Pages).
+const basename = import.meta.env.BASE_URL.replace(/\/$/, "")
+
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
@@ -21,7 +24,7 @@ createRoot(document.getElementById("root") as HTMLElement).render(
 		<NotificationProvider>
 			<QueryClientProvider client={queryClient}>
 				<WalletProvider>
-					<BrowserRouter>
+					<BrowserRouter basename={basename}>
 						<App />
 					</BrowserRouter>
 				</WalletProvider>

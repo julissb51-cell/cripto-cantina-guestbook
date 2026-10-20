@@ -29,6 +29,7 @@ lerna-debug.log*
 .env
 .env.*
 !.env.example
+!.env.production
 
 # easy way to create temporary local-only files and folders
 *.local.*
@@ -36,9 +37,9 @@ lerna-debug.log*
 # macOS-specific files
 .DS_Store
 
-# generated contract bindings + clients (Binding packages and flattened index.ts)
-app-lib/clients/*
-!app-lib/clients/.gitkeep
+# The testnet contract client in app-lib/clients is committed so GitHub Pages
+# can build the frontend without a local network or a contract deploy.
+# `dist/` stays ignored; `npm run build` compiles the client first.
 
 # Agent/editor scratch
 .claude/
