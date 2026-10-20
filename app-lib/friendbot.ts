@@ -1,0 +1,49 @@
+import { stellarNetwork } from "./env"
+
+// Utility to get the correct Friendbot URL based on environment
+export function getFriendbotUrl(address: string) {
+	switch (stellarNetwork) {
+		case "LOCAL":
+			// Use proxy in development for local
+			return `/friendbot?addr=${address}`
+		case "FUTURENET":
+			return `https://friendbot-futurenet.stellar.org/?addr=${address}`
+		case "TESTNET":
+			return `https://friendbot.stellar.org/?addr=${address}`
+		default:
+			throw new Error(`Friendbot is not available on ${stellarNetwork}`)
+	}
+}
+
+/**
+ * Fund an account via Friendbot. Returns a result the caller can surface as a
+ * notification — framework-agnostic (no UI/state concerns here).
+ */
+export async function fundAccount(
+	address: string,
+): Promise<{ ok: boolean; message: string }> {
+	try {
+		const response = await fetch(getFriendbotUrl(address))
+		if (response.ok) {
+			return {
+				ok: true,
+				message: "Friendbot ya dejó XLM de prueba en la cuenta.",
+			}
+		}
+		const body: unknown = await response.json()
+		if (
+			body !== null &&
+			typeof body === "object" &&
+			"detail" in body &&
+			typeof body.detail === "string"
+		) {
+			return { ok: false, message: `Friendbot no pudo fondear: ${body.detail}` }
+		}
+		return { ok: false, message: "Friendbot no pudo fondear la cuenta." }
+	} catch {
+		return {
+			ok: false,
+			message: "No hubo respuesta de Friendbot. Inténtalo de nuevo.",
+		}
+	}
+}

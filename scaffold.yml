@@ -1,0 +1,31 @@
+version: 2
+
+# Cripto Cantina — libro de visitas.
+# `stellar scaffold build` y `watch` leen este archivo.
+project:
+  contracts-dir: contracts
+  clients-dir: app-lib/clients
+  package-manager: npm@10.9.9
+
+# Elige la red con `--network` o con STELLAR_NETWORK. Sin eso, el default es local.
+networks:
+  local:
+    accounts: [me]
+
+  # Testnet apunta al contrato ya desplegado. `deployer` es la identidad
+  # que lo publicó; Friendbot la fondeó en ese build.
+  testnet:
+    accounts: [deployer]
+    allow-deploy: true
+
+contracts:
+  libro-de-visitas:
+    type: workspace
+    source: libro-de-visitas
+    networks:
+      local:
+      # Contrato desplegado en testnet. Cambiar a `type: workspace` solo si
+      # quieres publicar otra instancia.
+      testnet:
+        type: contract
+        source: CDYLDNBCQJZZALN4QJRV5YN5MSWOSK6UCLWPA4JY22S3CCDFWNG3VU4K
